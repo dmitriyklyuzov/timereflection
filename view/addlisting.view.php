@@ -100,7 +100,7 @@
 				</div>
 
 				<div class="form-group text-center">
-					<input type="submit" name="submit" class="btn btn-success" value="Add">
+					<input type="submit" name="submit" class="btn btn-success btn-lg" value="Add listing">
 				</div>
 
 			</form>

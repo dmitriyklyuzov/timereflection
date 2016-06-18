@@ -16,7 +16,8 @@ body{
 }
 
 .navbar .navbar-brand{
-	color: #a94442; /*ALIZARIN*/
+	/*color: #a94442;*/ /*ALIZARIN*/
+	color: #e74c3c; /*Flat UI - Alizarin*/
 }
 
 .navbar-form{
@@ -156,4 +157,17 @@ body{
 		/*margin-left: 0.625em;
 		margin-right: 0.625em;*/
 	}
+}
+
+/* COLORS */
+.text-success{
+	color: #27ae60; /*Flat UI - Nephritis*/
+}
+
+.text-warning{
+	color: #f39c12; /*Flat UI - Orange*/
+}
+
+.text-danger{
+	color: #e74c3c; /*Flat UI - Alizarin*/
 }
