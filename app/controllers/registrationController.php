@@ -10,118 +10,95 @@
 		header('Location: index');
 	}
 
-	if(isset($_POST['submit'])){
+	if( isset($_POST['f_name']) && isset($_POST['email']) && isset($_POST['password']) ){
 
-		debugMsg('OK: submit was pressed.');
+		// debugMsg('OK: POST variables are set.');
 
-		if( isset($_POST['f_name']) && isset($_POST['email']) && isset($_POST['password']) ){
+		if( $_POST['f_name'] && $_POST['email'] && $_POST['password'] ){
 
-			debugMsg('OK: POST variables are set.');
+			// debugMsg('OK: POST variables exist and =! "" ');
 
-			if( $_POST['f_name'] && $_POST['email'] && $_POST['password'] ){
+			$name = sanitize($_POST['f_name']);
+			$email = sanitize($_POST['email']);
+			$password = sanitize($_POST['password']);
 
-				debugMsg('OK: POST variables exist and =! "" ');
+			$name = stripFormChars($name);
+			$email = stripFormChars($email);
+			$password = genPass(stripFormChars($password), $email);
 
-				$name = sanitize($_POST['f_name']);
-				$email = sanitize($_POST['email']);
-				$password = sanitize($_POST['password']);
+			// debugMsg('First name: ' . $name);
+			// debugMsg('Email: ' . $email);
+			// debugMsg('Password: ' . $password);
 
-				$name = stripFormChars($name);
-				$email = stripFormChars($email);
-				$password = genPass(stripFormChars($password), $email);
+			if ($name!='' && $email!='' && $password!=''){
 
-				debugMsg('First name: ' . $name);
-				debugMsg('Email: ' . $email);
-				debugMsg('Password: ' . $password);
+				if( $name && $email && $password){
 
-				if ($name!='' && $email!='' && $password!=''){
+					// debugMsg('OK: No error.');
 
-					if( $name && $email && $password){
+					$conn = DB();
 
-						debugMsg('OK: No error.');
+					if ($conn){
+						// debugMsg('OK: Connection successful.');
 
-						$conn = DB();
+						$result = $user -> findEmail($email);
 
-						if ($conn){
-							debugMsg('OK: Connection successful.');
+						if($result -> fetch_assoc()){
+							$errorMsg = 'This email already exists.';
+							echo $errorMsg;
+							$conn -> close();
+							// debugMsg('Connection closed.');
+						}
+						else{
+							// debugMsg('This email doesnt yet exist.');
+
+							$user -> create($name, $email, $password);
+
+							$user -> setEmail($email);
+
+							$user -> setRegDate();
 
 							$result = $user -> findEmail($email);
 
 							if($result -> fetch_assoc()){
-								$errorMsg = 'This email already exists.';
-								$conn -> close();
-								debugMsg('Connection closed.');
-								include ('../views/register.view.php');
+								echo '1';
 							}
 							else{
-								debugMsg('This email doesnt yet exist.');
-
-								$user -> create($name, $email, $password);
-
-								$user -> setEmail($email);
-
-								$user -> setRegDate();
-
-								$result = $user -> findEmail($email);
-
-								if($result -> fetch_assoc()){
-									// The account was created
-									$msg = 'GREAT!';
-									$glyphicon = 'glyphicon glyphicon-ok text-success';
-									$text = '<p>Your account has been created.</p>';
-									// <p>Please check your email for an activation link.</p>';
-									$link = 'login.php';
-									$btn = 'LOG IN';
-								}
-								else{
-									// The account was not created
-									$msg = 'OH NO! :(';
-									$glyphicon = 'glyphicon glyphicon-remove text-danger';
-									$text = '<p>Something went wrong.</p><p>Please contact your website administrator.</p>';
-									$link = 'register.php';
-									$btn = 'SIGN UP';
-								}
-								include('../views/registrationconfirmation.view.php');
-
-								$conn->close();
-
-								// mysqli_close($conn);
-								debugMsg('Connection closed.<br>');
+								$errorMsg = 'Something went wrong and the account was not created. Please try again or contact your administrator.';
+								echo $errorMsg;
 							}
 
+							$conn->close();
+
+							// debugMsg('Connection closed.<br>');
 						}
-						else{
-							$errorMsg = 'Something went wrong. Please try again.';
-							debugMsg('WARNING: Connection failed.');
-							include ('../views/register.view.php');
-						}
+
 					}
 					else{
-						debugMsg('WARNING: !f_name or !email or !password');
-						$errorMsg = "Please check the information entered and try again.";
-						include ('../views/register.view.php');
+						$errorMsg = 'Something went wrong. Please try again.';
+						// debugMsg('WARNING: Connection failed.');
+						echo $errorMsg;
 					}
 				}
 				else{
-					$errorMsg = 'All fields are required. Please try again.';
-					debugMsg('WARNING: Connection failed.');
-					include ('../views/register.view.php');
+					$errorMsg = "Please check the information entered and try again.";
+					echo $errorMsg;
+					// debugMsg('WARNING: !f_name or !email or !password');
 				}
-
 			}
 			else{
-				debugMsg('WARNING: One or both fields were left blank.');
 				$errorMsg = 'All fields are required. Please try again.';
-				include ('../views/login.view.php');
+				echo $errorMsg;
+				// debugMsg('WARNING: Connection failed.');
 			}
+
 		}
 		else{
-			$errorMsg = 'Something went wrong. Please try again.';
-			debugMsg('WARNING: One of the variables is not set.');
-			include ('../views/register.view.php');
+			// // debugMsg('WARNING: One or both fields were left blank.');
+			$errorMsg = 'All fields are required. Please try again.';
+			echo $errorMsg;
 		}
 	}
-
 	else include('../views/register.view.php');
 
 ?>

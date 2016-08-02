@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<?php getHead('Log in'); ?>
-		<script type="text/javascript" src="public/js/checkLogin.js"></script>
+		<script type="text/javascript" src="public/js/login.js"></script>
 	</head>
 
 	<body>
@@ -10,18 +10,22 @@
 		<?php getNavbar(); ?>
 
 		<div class="container login-form-container">
-			
-			<?php // include('parts/debug.part.php');?>
-			<?php // include('parts/error.part.php');?>
 
-			<div class="error" id="errorDiv"></div>
+			<div class="error" id="errorDiv" style="display: none">
+				<div class="panel panel-danger">
+					<div class="panel-heading">
+						<h5 class="text-center">ERROR</h5>
+						<p class="text-center" id="errorText"></p>
+					</div>
+				</div>
+			</div>
 			
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2 class="text-center">Log in</h2>
 				</div>
 				<div class="panel-body">
-					<form action="login" method="POST" style="background-color: white;" onsubmit="event.preventDefault(); checkLogin()">
+					<form action="login" method="POST" style="background-color: white;" onsubmit="event.preventDefault(); login()">
 
 						<!-- Email -->
 						<div class="form-group text-center">
@@ -41,7 +45,7 @@
 
 						<div class="form-group form-inline text-center">
 							<input type="submit" name="submit" class="btn btn-success" value="LOG IN">
-							<a href="register.php" class="btn btn-primary margin-left-2em">SIGN UP</a>
+							<!-- <a href="register.php" class="btn btn-primary margin-left-2em">SIGN UP</a> -->
 						</div>
 
 					</form>
