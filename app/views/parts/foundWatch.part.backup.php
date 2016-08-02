@@ -1,12 +1,9 @@
-<!-- inside of watch.part.php! -->
-
-<div class="modal fade" id="foundWatchModal" role="dialog">
-	<div class="vertical-alignment-helper">
+<div class="modal fade" id="foundListingModal" role="dialog">
+	<div class="vertical-align-helper">
 		<div class="modal-dialog vertical-align-center">
 			<div class="modal-content">
-				
 				<div class="modal-header">
-					<h4 class="modal-title text-center">Is this the watch you want to list?</h4>
+					<h4 class="text-center" id="panel-heading-text">Is this the watch you want to list?</h4>
 				</div>
 
 				<div class="modal-body">
@@ -28,9 +25,7 @@
 						'<?php echo $material ?>',
 						'<?php echo $dial ?>',
 						'<?php echo $retail ?>')">YES</button>
-
-						<button class="btn btn-danger margin-left-2em" type="button" data-dismiss="modal" onclick="incrementRef()">NO</button>
-						<!-- <a href="add" class="btn btn-danger margin-left-2em" data-dismiss="modal" onclick="incrementRef()">NO</a> -->
+						<a href="add" class="btn btn-danger margin-left-2em" data-dismiss="modal">NO</a>
 					</div>
 				</div>
 

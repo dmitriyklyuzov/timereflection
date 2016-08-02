@@ -4,7 +4,14 @@
 		<?php getHead('New item'); ?>
 		<script type="text/javascript" src="public/js/checkWatch.js"></script>
 		<script type="text/javascript" src="public/js/getListingForm.js"></script>
+		<script type="text/javascript" src="public/js/incrementRef.js"></script>
 		<script type="text/javascript" src="public/js/modal.js"></script>
+
+		<script>
+			function showModal(){
+				$('#foundWatchModal').modal({backdrop:true});
+			}
+		</script>
 	</head>
 
 	<body>
@@ -12,9 +19,6 @@
 		<?php getNavbar(); ?>
 		
 		<div class="container add-listing-form-container">
-
-			<?php include('parts/debug.part.php');?>
-			<?php include('parts/error.part.php');?>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -39,9 +43,6 @@
 			</div>
 
 			<!-- <button type="button" class="btn btn-lg btn-success" onclick="modal()">Modal</button> -->
-
-			<div id="content">
-			</div>
 
 			<div class="panel panel-default" id="listing-details-panel">
 				<div class="panel-heading">
@@ -157,17 +158,20 @@
 					<div class="form-group text-center">
 						<input type="submit" name="submit" class="btn btn-success" value="Add listing">
 					</div>
-				</div>
+				</div> 
 
 				</form>
 			</div>
 			
 		</div>
 
-			<div class="listing-confirmation">
+		<!-- </div> -->
 
-				<div class="modal fade" id="myModal" role="dialog">
-					<div class="modal-dialog">
+		<div class="listing-confirmation">
+
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="vertical-alignment-helper">
+					<div class="modal-dialog vertical-align-center">
 						<div class="modal-content">
 							
 							<div class="modal-header">
@@ -188,6 +192,11 @@
 					</div>
 				</div>
 			</div>
+		</div> <!-- listing confirmation -->
+
+		<div id="content">
+
 		</div>
+
 	</body>
 </html>

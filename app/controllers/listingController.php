@@ -48,9 +48,6 @@
 			}
 			else echo '0';
 		}
-		if($action == 'list'){
-			echo 'action is list!';
-		}
 		exit();
 	}
 

@@ -5,7 +5,7 @@ function checkWatch(){
 	// ref = '123';
 	
 	if(ref == ""){
-		document.getElementById("content").innerHTML = "Nothing entered";
+		document.getElementById("ref").focus();
 		return;
 	}
 	else{
@@ -20,12 +20,12 @@ function checkWatch(){
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 				if(xmlhttp.responseText!='0'){
 					document.getElementById("content").innerHTML = xmlhttp.responseText;
-					$('#myModal').modal({backdrop:true});
+					$('#foundWatchModal').modal({backdrop:true});
+					// alert('response is not 0');
 				}
 				else{
 					document.getElementById('ref-input').value = ref;
 					document.getElementById('brand-input').focus();
-					// window.location.replace("/timereflection/");
 				}
 			}
 		};
