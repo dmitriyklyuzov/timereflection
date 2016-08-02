@@ -17,103 +17,108 @@
 		header('Location: index');
 	}
 
-	if(isset($_POST['submit'])){
+	if( isset($_POST['email']) && isset($_POST['password']) ){
 
-		debugMsg('submit was pressed.');
+		$debugMsg = $debugMsg . 'POST variables are set.<br>';
 
-		if( isset($_POST['email']) && isset($_POST['password']) ){
+		// debugMsg('POST variables are set.');
 
-			debugMsg('POST variables are set.');
+		if($_POST['email'] && $_POST['password'] && $_POST['email']!='' && $_POST['password']!=''){
 
-			if($_POST['email'] && $_POST['password'] && $_POST['email']!='' && $_POST['password']!=''){
+			$debugMsg = $debugMsg . 'POST variables exist and =! "" <br>';
 
-				debugMsg('POST variables exist and =! "" ');
+			$email = sanitize($_POST['email']);
+			$password = sanitize($_POST['password']);
 
-				$email = sanitize($_POST['email']);
-				$password = sanitize($_POST['password']);
+			$email = stripFormChars($email);
+			$password = genPass(stripFormChars($password), $email);
 
-				$email = stripFormChars($email);
-				$password = genPass(stripFormChars($password), $email);
+			$$debugMsg = $debugMsg . 'Email: ' . $email . ', Password: '. $password . '<br>';
 
-				debugMsg('Email: ' . $email . ', Password: '. $password);
+			$conn = DB();
 
-				$conn = DB();
+			if ($conn){
+				
+				$debugMsg = $debugMsg . 'OK: Connection successful.<br>';
 
-				if ($conn){
-					
-					debugMsg('Connection successful.');
+				$result = $user -> findEmail($email);
 
-					$result = $user -> findEmail($email);
+				if($row = $result -> fetch_assoc()){
 
-					if($row = $result -> fetch_assoc()){
+					$debugMsg = $debugMsg . 'OK: Username exists.<br>';
 
-						debugMsg('Username exists.');
+					$user -> setEmail($row['user_email']);
+					$user -> setName($row['user_f_name']);
 
-						$user -> setEmail($row['user_email']);
-						$user -> setName($row['user_f_name']);
+					if($row['user_login_attempts'] < 3){
 
-						if($row['user_login_attempts'] < getMaxLoginAttempts()){
+						$debugMsg = $debugMsg . 'OK: Login attempts are less than 3 - login allowed.<br>';
 
-							debugMsg('Login attempts are less than 3 - login allowed.');
-
-							if($row['user_password'] == $password){
-							
-								$user -> setLoggedIn();
-								$user -> updateLastLogin();
-								$user -> zeroLoginAttempts();
-
-								header('Location: index');
-							}
-							else{
-								$user -> incrementLoginAttempts();
-
-								debugMsg('Incremented login attempts.');
-								debugMsg('Login attempts are now ' . $user -> getLoginAttempts());
-
-								if($user -> getLoginAttempts() == getMaxLoginAttempts()){
-									debugMsg('Login attempts == getMaxLoginAttempts()');
-									$errorMsg = "You tried to log in too many times. Please contact your administrator.";
-								}
-								else{
-									debugMsg('Login attempts != getMaxLoginAttempts()');
-									$errorMsg = 'Password is incorrect. Please try again.<br>' . (getMaxLoginAttempts() - $user -> getLoginAttempts()) . ' login attempts remaining';
-									debugMsg('Password does not match.');
-								}
-
-								include ('../views/login.view.php');
-							}
+						if($row['user_password'] == $password){
+						
+							$user -> setLoggedIn();
+							$user -> updateLastLogin();
+							$user -> zeroLoginAttempts();
+							echo '1';
 						}
 						else{
-							debugMsg('Login attempts are ' . $user -> getLoginAttempts());
-							$errorMsg = "You tried to log in too many times. Please contact your administrator.";
-							include ('../views/login.view.php');
+							$user -> incrementLoginAttempts();
+
+							$debugMsg = $debugMsg . 'OK: Incremented login attempts.<br>';
+							$debugMsg = $debugMsg . 'OK: Login attempts are now ' . $user -> getLoginAttempts() . '<br>';
+
+							if($user -> getLoginAttempts() == 3){
+								$debugMsg = $debugMsg . 'ERROR: Login attempts == getMaxLoginAttempts()<br>';
+								$errorMsg = "You tried to log in too many times. Please contact your administrator.";
+								include ('../views/parts/error.part.php');
+								include ('../views/parts/debug.part.php');
+							}
+							else{
+								$debugMsg = $debugMsg . 'OK: Login attempts != getMaxLoginAttempts()<br>';
+								$errorMsg = 'Password is incorrect. Please try again.<br>' . (3 - $user -> getLoginAttempts()) . ' login attempts remaining';
+								$debugMsg = $debugMsg . 'ERROR: Password does not match.<br>';
+								include ('../views/parts/error.part.php');
+								include ('../views/parts/debug.part.php');
+							}
+							// include ('../views/login.view.php');
 						}
 					}
 					else{
-						$errorMsg = 'User name or password are incorrect. Try again.';
-						debugMsg('Username does not exist!');
-						include ('../views/login.view.php');
+						$errorMsg = "You tried to log in too many times. Please contact your administrator.";
+						$debugMsg = $debugMsg . 'ERROR: Login attempts are ' . $user -> getLoginAttempts() . '<br>';
+						include ('../views/parts/error.part.php');
+						include ('../views/parts/debug.part.php');
 					}
 				}
 				else{
-					$errorMsg = 'Connection failed';
-					debugMsg('WARNING: Connection failed!');
-					include ('../views/login.view.php');
+					$errorMsg = 'User name or password are incorrect. Try again.';
+					$debugMsg = $debugMsg . 'ERROR: Username does not exist!<br>';
+					include ('../views/parts/error.part.php');
+					include ('../views/parts/debug.part.php');
 				}
 			}
 			else{
-				debugMsg('One or both fields were left blank.');
-				$errorMsg = 'User name and password are required. Try again.';
-				include ('../views/login.view.php');
+				$errorMsg = 'Connection failed';
+				$debugMsg = $debugMsg . 'WARNING: Connection failed!<br>';
+				include ('../views/parts/error.part.php');
+				include ('../views/parts/debug.part.php');
 			}
 		}
-
 		else{
-			$errorMsg = 'Something went wrong. Please try again.';
-			debugMsg('WARNING: One of the variables is not set!');
-			include ('../views/login.view.php');
+			
+			$errorMsg = 'User name and password are required. Try again.';
+			$debugMsg = $debugMsg . 'One or both fields were left blank.<br>';
+			include ('../views/parts/error.part.php');
+			include ('../views/parts/debug.part.php');
 		}
 	}
+
+	// else{
+	// 	$errorMsg = 'Something went wrong. Please try again.';
+	// 	$debugMsg = $debugMsg . 'WARNING: One of the variables is not set!<br>';
+	// 	include ('../views/parts/error.part.php');
+	// 	include ('../views/parts/debug.part.php');
+	// }
 
 	else include('../views/login.view.php');
 ?>

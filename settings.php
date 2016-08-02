@@ -1,7 +1,10 @@
 <?php
-	$_SESSION['debug'] = true;
 
-	// Max Login Attempts
+	// $debugMode = true;
+	$debugMode = false;
+
 	$_SESSION['maxLoginAttempts'] = 3;
+
+	$maxLoginAttempts = 3;
 
 ?>

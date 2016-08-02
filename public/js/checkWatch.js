@@ -25,6 +25,7 @@ function checkWatch(){
 				else{
 					document.getElementById('ref-input').value = ref;
 					document.getElementById('brand-input').focus();
+					// window.location.replace("/timereflection/");
 				}
 			}
 		};

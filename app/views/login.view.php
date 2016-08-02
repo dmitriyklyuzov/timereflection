@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php getHead('Log in'); ?>	
+		<?php getHead('Log in'); ?>
+		<script type="text/javascript" src="public/js/checkLogin.js"></script>
 	</head>
 
 	<body>
@@ -10,21 +11,23 @@
 
 		<div class="container login-form-container">
 			
-			<?php include('parts/debug.part.php');?>
-			<?php include('parts/error.part.php');?>
+			<?php // include('parts/debug.part.php');?>
+			<?php // include('parts/error.part.php');?>
+
+			<div class="error" id="errorDiv"></div>
 			
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2 class="text-center">Log in</h2>
 				</div>
 				<div class="panel-body">
-					<form action="login" method="POST" style="background-color: white;">
+					<form action="login" method="POST" style="background-color: white;" onsubmit="event.preventDefault(); checkLogin()">
 
 						<!-- Email -->
 						<div class="form-group text-center">
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></div>
-								<input name="email" class="form-control input-lg" type="email" placeholder="Email" required autofocus>
+								<input name="email" id="email" class="form-control input-lg" type="email" placeholder="Email" required autofocus>
 							</div>
 						</div>
 
@@ -32,7 +35,7 @@
 						<div class="form-group text-center">
 							<div class="input-group">
 								<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
-								<input name="password" class="form-control input-lg" type="password" placeholder="Password" required>
+								<input name="password" id="password" class="form-control input-lg" type="password" placeholder="Password" required>
 							</div>
 						</div>
 
