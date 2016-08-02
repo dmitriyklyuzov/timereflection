@@ -1,0 +1,29 @@
+#<IfModule mod_rewrite.c>
+
+# Turn the Rewrite Engine On
+RewriteEngine on
+
+# index
+RewriteRule ^/ app/controllers/indexController.php [NC,L]
+RewriteRule ^index app/controllers/indexController.php [NC,L]
+
+#test
+RewriteRule ^test app/controllers/testController.php [NC,L]
+
+#login / logout
+RewriteRule ^login app/controllers/loginController.php [NC,L]
+RewriteRule ^logout app/controllers/loginController.php?action=logout [NC,L]
+
+#register
+RewriteRule ^register app/controllers/registrationController.php [NC,L]
+
+#add
+# RewriteRule ^add/([0-9a-zA-Z]+) app/controllers/testController.php?reference=$1 [NC,L]
+RewriteRule ^add/list/([0-9a-zA-Z]+) app/controllers/listingController.php?action=list&reference=$1 [NC,L]
+RewriteRule ^add/lookup/([0-9a-zA-Z]+) app/controllers/listingController.php?action=lookup&reference=$1 [NC,L]
+RewriteRule ^add/list/([0-9a-zA-Z]+) app/controllers/listingController.php?listreference=$1 [NC,L]
+RewriteRule ^add app/controllers/listingController.php [NC,L]
+
+# RewriteRule    ^$    public/    [L]
+# RewriteRule    (.*) public/$1    [L]
+#</IfModule>
