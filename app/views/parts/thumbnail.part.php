@@ -2,7 +2,7 @@
 	<div class="thumbnail">
 		<p class="text-center padding-top-1em"><?php echo $brand.' '.$model?></p>
 		<hr>
-		<img src="public/img/watches/audemars-piguet-royal-oak.jpg" alt="Audemars Piguet">
+		<a href="details-<?php echo $listing_id; ?>"><img src="public/img/watches/audemars-piguet-royal-oak.jpg" alt="Audemars Piguet"></a>
 		<hr>
 		<div id="details" class="padding-left-1em">
 			<!-- <p><b>Brand:</b> <?php echo $brand; ?></p> -->

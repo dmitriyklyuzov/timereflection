@@ -27,6 +27,8 @@
 		private $price = '';
 		private $notes = '';
 		private $availability = '';
+		private $email = '';
+		private $listing_img_1 = '';
 
 		function generateListingId(){
 			$this -> listing_id = uniqid(uniqid());
@@ -115,6 +117,41 @@
 			$stmt -> close();
 			$conn -> close();
 		}
+
+		function setListingImg($img){
+			$this -> listing_img_1 = $img;
+		}
+
+		function getListingImg(){
+			return $this -> listing_img_1;
+		}
+
+		function updateListingImg(){
+			$conn = DB();
+			$conn -> query("UPDATE listing SET listing_img_1 = '" . $this -> listing_img_1 . "' WHERE listing_id = '" . $this -> listing_id . "';");
+			$conn -> close();
+		}
+		
+		function getListingByReference($id){
+			$conn = DB();
+			$result = $conn -> query("SELECT * FROM listing WHERE listing_id = '" . $id . "';");
+			$conn -> close();
+
+			while($row = $result -> fetch_assoc()){
+				$this -> SKU = $row['listing_SKU'];
+				$this -> listing_id = $row['listing_id'];
+				$this -> new_used = $row['listing_new_used'];
+				$this -> reference = $row['watch_reference'];
+				$this -> condition = $row['listing_condition'];
+				$this -> cost = $row['listing_our_cost'];
+				$this -> price = $row['listing_price'];
+				$this -> notes = $row['listing_notes'];
+				$this -> availability = $row['listing_available'];
+				$this -> email = $row['user_email'];
+				$this -> created = $row['listing_created'];
+			}
+		}
+
 	}
 
 ?>

@@ -151,6 +151,11 @@ body{
 	/*padding-bottom: 2em;*/
 }
 
+.details-container{
+	margin-top: 3em;
+	/*background-color: #fff;*/
+}
+
 /* COLORS */
 .text-success{
 	color: #27ae60; /*Flat UI - Nephritis*/
@@ -243,6 +248,9 @@ ul{
 	pointer-events: all;
 }
 
+.background-gray{
+	background-color: #f1f1f1;
+}
 
 @media (max-width: 767px){
 	.navbar{
@@ -264,5 +272,9 @@ ul{
 
 	.add-listing-form-container{
 		margin-top: 2em;
+	}
+
+	.details-container{
+		margin-top: 1em;
 	}
 }

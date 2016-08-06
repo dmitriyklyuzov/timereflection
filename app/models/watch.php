@@ -94,6 +94,32 @@
 			$stmt -> close();
 			$conn -> close();
 		}
+
+		// function __construct(){
+
+		// 	$this -> watch_reference = '';
+		// 	$this -> watch_id = '';
+		// 	$this -> watch_brand = '';
+		// 	$this -> watch_model = '';
+		// 	$this -> watch_material = '';
+		// 	$this -> watch_retail = '';
+		// }
+
+		function getWatchByReference($ref){
+			
+			$conn = DB();
+			$result = $conn -> query("SELECT * FROM watch WHERE watch_reference = '" . $ref . "';");
+			$conn -> close();
+
+			while($row = $result -> fetch_assoc()){
+				$this -> watch_reference = $row['watch_reference'];
+				$this -> watch_id = $row['watch_id'];
+				$this -> watch_brand = $row['watch_brand'];
+				$this -> watch_model = $row['watch_model'];
+				$this -> watch_material = $row['watch_material'];
+				$this -> watch_retail = $row['watch_retail'];
+			}
+		}
 	}
 
 ?>

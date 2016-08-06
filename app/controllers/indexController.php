@@ -20,6 +20,7 @@
 
 			while($rows = $resultSet -> fetch_assoc()){
 
+				$listing_id = $rows['listing_id'];
 				$brand = $rows['watch_brand'];
 				$model = $rows['watch_model'];
 				// $ref = $rows['listing_reference_number'];
