@@ -1,3 +1,4 @@
 #gitignore
 lib/securityFunctions.php
 time_tracking.xlsx
+public/img/watches/
