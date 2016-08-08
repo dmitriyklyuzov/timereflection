@@ -29,6 +29,8 @@
 		private $availability = '';
 		private $email = '';
 		private $listing_img_1 = '';
+		private $box = '';
+		private $papers = '';
 
 		function generateListingId(){
 			$this -> listing_id = uniqid(uniqid());
@@ -102,27 +104,45 @@
 			return $this -> availability;
 		}
 
+		function setBox($b){
+			$this -> box = $b;
+		}
+
+		function getBox(){
+			return $this -> box;
+		}
+
+		function setPapers($p){
+			$this -> papers = $p;
+		}
+
+		function getPapers(){
+			return $this -> papers;
+		}
+
 		function createListing($email){
 			$conn = DB();
 			$stmt = $conn->prepare("INSERT INTO listing (user_email, watch_reference, listing_condition,
 														listing_notes, listing_sku, listing_available,
-														listing_price, listing_new_used, listing_our_cost, 
+														listing_price, listing_new_used, listing_our_cost,
+														listing_box, listing_papers, 
 														listing_id, listing_created)
-									VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");		
-			$stmt->bind_param("ssssssssss", $email, $this -> reference, $this -> condition,
+									VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");		
+			$stmt->bind_param("ssssssssssss", $email, $this -> reference, $this -> condition,
 											$this -> notes, $this -> SKU, $this -> availability, 
-											$this -> price, $this -> new_used, $this -> cost, $this -> listing_id);
+											$this -> price, $this -> new_used, $this -> cost,
+											$this -> box, $this -> papers, $this -> listing_id);
 			
 			$stmt -> execute();
 			$stmt -> close();
 			$conn -> close();
 		}
 
-		function setListingImg($img){
+		function setListingImg1($img){
 			$this -> listing_img_1 = $img;
 		}
 
-		function getListingImg(){
+		function getListingImg1(){
 			return $this -> listing_img_1;
 		}
 
@@ -130,6 +150,33 @@
 			$conn = DB();
 			$conn -> query("UPDATE listing SET listing_img_1 = '" . $this -> listing_img_1 . "' WHERE listing_id = '" . $this -> listing_id . "';");
 			$conn -> close();
+		}
+
+		function insertListingImgById($img, $listing_id){
+			// $conn = DB();
+			// $conn -> query("INSERT INTO listing_img ()SET listing_img_1 = '" . $img . "' WHERE listing_id = '" . $listing_id . "';");
+			// $conn -> close();
+		}
+
+		function getImages(){
+			$conn = DB();
+			$result = $conn -> query("SELECT img_name FROM listing_img WHERE listing_id = '" . $this -> listing_id . "';");
+			$conn -> close();
+
+			$active = 'active';
+			$activeExists = false;
+
+			while($row = $result -> fetch_assoc()){
+				$img = $row['img_name'];
+
+				if($activeExists){
+					$active = '';
+				}
+				$activeExists = true;
+
+				include('../views/parts/thumbnailImg.part.php');
+			}
+
 		}
 		
 		function getListingByReference($id){

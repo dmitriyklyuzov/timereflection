@@ -152,8 +152,17 @@ body{
 }
 
 .details-container{
-	margin-top: 3em;
+	margin-top: 2em;
 	/*background-color: #fff;*/
+}
+
+.details-container .form-group{
+	margin-bottom: 0em;
+	/*background-color: #fff;*/
+}
+
+.borderless tr, .borderless tbody tr td{
+	border: none;
 }
 
 /* COLORS */
@@ -276,5 +285,7 @@ ul{
 
 	.details-container{
 		margin-top: 1em;
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 }

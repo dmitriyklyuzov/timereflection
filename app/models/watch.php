@@ -7,6 +7,7 @@
 		private $watch_model = '';
 		private $watch_material = '';
 		private $watch_retail = '';
+		private $watch_dial = '';
 
 		function getBrandList(){
 			$conn = DB();
@@ -76,19 +77,28 @@
 			return $this -> watch_reference;
 		}
 
+		function setWatchDial($d){
+			$this -> watch_dial = $d;
+		}
+
+		function getWatchDial(){
+			return $this -> watch_dial;
+		}
+
 		function createWatch($email){
 			$conn = DB();
 			
 			$stmt = $conn->prepare("INSERT INTO watch (watch_reference, watch_brand,
 														watch_model, watch_material,
-														watch_retail, watch_id,
+														watch_retail, watch_dial,
+														watch_id,
 														user_email, watch_created)
-									VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");		
+									VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())");		
 			
-			$stmt->bind_param("sssssss",	$this -> watch_reference, $this -> watch_brand,
+			$stmt->bind_param("ssssssss",	$this -> watch_reference, $this -> watch_brand,
 											$this -> watch_model, $this -> watch_material,
-											$this -> watch_retail, $this -> watch_id,
-											$email);
+											$this -> watch_retail, $this -> watch_dial,
+											$this -> watch_id, $email);
 			
 			$stmt -> execute();
 			$stmt -> close();

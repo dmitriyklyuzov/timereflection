@@ -48,8 +48,6 @@
 		// $retail_formatted = number_format($retail);
 		$material = $watch -> getWatchMaterial();
 
-
-
 		include('../views/details.view.php');
 
 

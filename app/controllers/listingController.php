@@ -36,13 +36,15 @@
 				$brand = $row['watch_brand'];
 				$model = $row['watch_model'];
 				$material = $row['watch_material'];
-				$dial = 'Not available';
-				$retail = $row['watch_retail'];
+				$dial = $row['watch_dial'];
+				$retail = number_format($row['watch_retail']);
+				
 
 				$watch -> setWatchBrand($brand);
 				$watch -> setWatchModel($model);
 				$watch -> setWatchMaterial($material);
 				$watch -> setWatchRetail($retail);
+				$watch -> setWatchDial($dial);
 
 				include ('../views/parts/foundWatch.part.php');
 			}
@@ -111,6 +113,12 @@
 						$watch -> setWatchRetail($retail);
 					}
 
+					if(isset($_POST['dial'])){
+						debugMsg('OK: dial is set');
+						$dial = sanitize($_POST['dial']);
+						$watch -> setWatchDial($dial);
+					}
+
 					$watch -> generateWatchId();
 
 					$watch -> createWatch($user -> getEmail());
@@ -160,6 +168,18 @@
 					debugMsg('OK: availability is set');
 					$availability = sanitize($_POST['availability']);
 					$listing -> setAvailability($availability);
+				}
+
+				if(isset($_POST['box'])){
+					debugMsg('OK: box is set');
+					$box = sanitize($_POST['box']);
+					$listing -> setBox($box);
+				}
+
+				if(isset($_POST['papers'])){
+					debugMsg('OK: papers is set');
+					$papers = sanitize($_POST['papers']);
+					$listing -> setPapers($papers);
 				}
 
 				$listing -> generateListingId();

@@ -2,49 +2,67 @@
 <html>
 	<head>
 		<?php getHead($brand . ' ' . $model); ?>
-		<script type="text/javascript" src="public/js/login.js"></script>
+		<!-- <script type="text/javascript" src="public/js/login.js"></script> -->
+		<!-- <script type="text/javascript" src="public/js/setMainImg.js"></script> -->
+		<!-- <script type="text/javascript" src="public/js/setHeight.js"></script> -->
 	</head>
 
-	<body>
+	<body style="">
 		<?php getNavbar(); ?>
 
-		<div class="container details-container">
+		<div class="container details-container background-white">
 
 
 			<!-- IMAGE -->
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 background-gray">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 margin-top-2em background-white">
 				<div class="row">
-					<div class="col-lg-12 padding-top-1em background-white clearfix">
-						<img src="public/img/watches/rolex-daytona-2.jpg" class="img-responsive" alt="IWC">
-					</div>	
-				</div>
-				
-				<!-- <div class="row margin-top-1em">
-					<div class="col-lg-12 padding-top-1em background-white clearfix">
-						<p class="text-center">Modify / Delete</p>
-					</div>	
-				</div> -->
-			</div>
+					<div class=" padding-top-1em background-white clearfix">
+						<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner" role="listbox">
+								<?php $listing -> getImages(); ?>
+							</div>
 
+							<!-- Left and right controls -->
+							<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" style="background-image: none;">
+								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							</a>
+							<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="background-image: none;">
+								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							</a>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
 			
 			<!-- DETAILS -->
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 clearfix">
-				<div class="col-lg-12 background-white clearfix">
+				<div class=" background-white clearfix">
 					<div class="padding-top-1em">
 						<h3 class="text-center"><?php echo $brand . ' ' . $model; ?></h3>
-						<i><h2 contenteditable="true" class="text-primary text-center">$<?php echo $price;?></h2></i>
-						<!-- <h3 class="text-center">DETAILS</h3> -->
-						<br>
-						<table class="table">
-						<thead></thead>
+						<hr>
+						<div class="row padding-bottom-1em">
+							<div class="col-xs-6">
+								<h4 class="text-muted text-center text-success"><i>$<?php echo $price;?></h4></i>
+							</div>
+							<div class="col-xs-6">
+								<h4 class="text-muted text-center text-success"><?php echo strtoupper($available);?></h4>
+							</div>
+						</div>
+						
+ 						<table class="table">
 							<tbody>
-								<tr>
+								<!-- <tr>
 									<td><b>STATUS</b></td>
 									<td contenteditable="true" class="<?php echo $text; ?>"><?php echo strtoupper($available); ?></td>
-								</tr>
+								</tr> -->
 								<tr>
 									<td><b>BRAND</b></td>
-									<td><?php echo $brand; ?></td>
+									<td contenteditable="true"><?php echo $brand; ?></td>
 								</tr>
 								<tr>
 									<td><b>MODEL</b></td>
@@ -84,7 +102,7 @@
 								</tr>
 								<tr>
 									<td><b>NOTES</b></td>
-									<td><?php echo $notes; ?></td>
+									<td contenteditable="true"><?php echo $notes; ?></td>
 								</tr>
 							</tbody>
 						</table>
