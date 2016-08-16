@@ -1,6 +1,6 @@
 <?php
 
-function getHead($title) {
+function getHead($title='Timereflection') {
 	?>
 	
 	<title><?php echo $title; ?></title>
@@ -16,6 +16,8 @@ function getHead($title) {
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="public/css/multi-columns-row.css"> <!-- row fix -->
 	<link rel="stylesheet" type="text/css" href="public/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="public/css/colors.css">
+	<link rel="stylesheet" type="text/css" href="public/css/animate.css">
 	
 	<!-- JS -->
 	<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->

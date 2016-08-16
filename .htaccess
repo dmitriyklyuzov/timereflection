@@ -9,6 +9,7 @@ RewriteRule ^index app/controllers/indexController.php [NC,L]
 
 # test
 RewriteRule ^test app/controllers/testController.php [NC,L]
+# RewriteRule ^test2 app/controllers/testController2.php [NC,L]
 
 # login / logout
 RewriteRule ^login app/controllers/loginController.php [NC,L]
@@ -25,6 +26,12 @@ RewriteRule ^add app/controllers/listingController.php [NC,L]
 
 # details
 RewriteRule ^details-([0-9a-zA-Z]+) app/controllers/detailsController.php?listingId=$1 [NC,L]
+
+#admin
+RewriteRule ^admin app/controllers/adminController.php [NC,L]
+
+#delete
+RewriteRule ^deleteImg app/controllers/deleteAllImages.php
 
 # RewriteRule    ^$    public/    [L]
 # RewriteRule    (.*) public/$1    [L]

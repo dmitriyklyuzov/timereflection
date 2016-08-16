@@ -1,0 +1,80 @@
+body{
+	/*margin-top:3.6em;*/
+	background-color: #f1f1f1;
+}
+
+/* COLORS */
+.text-success{
+	color: #27ae60; /*Flat UI - Nephritis*/
+}
+
+.text-warning{
+	color: #f39c12; /*Flat UI - Orange*/
+}
+
+.text-danger{
+	color: #e74c3c; /*Flat UI - Alizarin*/
+}
+
+.background-success{
+	background-color: #2ecc71; /*Flat UI - Emerald*/
+}
+
+.background-primary{
+	background-color: #2980b9; /*Flat UI - Belize Hole*/
+}
+
+.background-warning{
+	background-color: #f39c12; /*Flat UI - Orange*/
+}
+
+.background-danger{
+	background-color: #e74c3c; /*Flat UI - Alizarin*/
+}
+
+.btn-success{
+	background-color: #2ecc71; /*Flat UI - Emerald*/
+	border-color: #2ecc71; /*Flat UI - Emerald*/
+}
+
+.btn-success:hover{
+	background-color: #27ae60; /*Flat UI - Nephritis*/
+	border-color: #27ae60; /*Flat UI - Nephritis*/
+}
+
+.btn-primary{
+	background-color: #3498db; /*Flat UI - Peter River*/
+	border-color: #3498db; /*Flat UI - Peter River*/
+}
+
+.btn-primary:hover{
+	background-color: #2980b9; /*Flat UI - Belize Hole*/
+	border-color: #2980b9; /*Flat UI - Belize Hole*/
+}
+
+.btn-black{
+	background-color: #000;
+	border-color: #000;
+}
+
+.btn-dark-blue{
+	background-color: #2c3e50; /*Flat UI - Midnight Blue*/
+	border-color: #2c3e50; /*Flat UI - Midnight Blue*/
+}
+
+.confirmation{
+	background-color: #fff;
+	max-width: 30em;
+}
+
+.panel-body{
+	background-color: #fff;
+}
+
+.background-color-white{
+	background-color: #fff;
+}
+
+.color-white{
+	color: white;
+}

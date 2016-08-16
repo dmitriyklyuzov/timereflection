@@ -27,9 +27,9 @@
 						'<?php echo $model ?>',
 						'<?php echo $material ?>',
 						'<?php echo $dial ?>',
-						'<?php echo $retail ?>')">YES</button>
+						'<?php echo $retail ?>'); goToPanel2();">YES</button>
 
-						<button class="btn btn-danger margin-left-2em" type="button" data-dismiss="modal" onclick="incrementRef()">NO</button>
+						<button class="btn btn-danger margin-left-2em" type="button" data-dismiss="modal" onclick="incrementRef(); goToPanel2();">NO</button>
 						<!-- <a href="add" class="btn btn-danger margin-left-2em" data-dismiss="modal" onclick="incrementRef()">NO</a> -->
 					</div>
 				</div>

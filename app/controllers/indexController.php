@@ -4,6 +4,20 @@
 	$errorMsg='';
 	include_once('../../lib/dependencies.php');
 
+	function getMainImage($id){
+			
+			$conn = DB();
+			$result = $conn -> query("SELECT img_name FROM listing_img WHERE main_img = 1 AND listing_id = '" . $id . "';");
+			$conn -> close();
+
+			if($row = $result -> fetch_assoc()){
+				$img = $row['img_name'];
+				return $img;
+			}
+			else return false;
+
+		}
+
 	function getThumbnails(){
 
 		$conn = DB();
@@ -55,6 +69,12 @@
 				// New / Used
 				// 1 - New
 				// 2 - Used
+
+				$imgSrc = 'http://placehold.it/300?text=IMAGE+NOT+AVAILABLE';
+
+				if($img = getMainImage($listing_id)){
+					$imgSrc = 'public/img/watches/' . $img;
+				}
 
 				include ('../views/parts/thumbnail.part.php');
 			}	

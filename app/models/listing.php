@@ -120,6 +120,37 @@
 			return $this -> papers;
 		}
 
+		static function getTotalCount(){
+			$conn = DB();
+			$result = $conn -> query('SELECT COUNT(*) FROM listing;');
+			if($row = $result -> fetch_assoc()){
+				return $row['COUNT(*)'];
+			}
+			else return '0';
+		}
+
+		static function getTotalPrice(){
+			$conn = DB();
+			$result = $conn -> query('SELECT SUM(listing_price) FROM listing;');
+			if($row = $result -> fetch_assoc()){
+				return $row['SUM(listing_price)'];
+			}
+			else return '0';
+		}
+
+		static function getTotalCost(){
+			$conn = DB();
+			$result = $conn -> query('SELECT SUM(listing_our_cost) FROM listing;');
+			if($row = $result -> fetch_assoc()){
+				return $row['SUM(listing_our_cost)'];
+			}
+			else return '0';
+		}
+
+		static function getProfit(){
+			return Listing::getTotalPrice() - Listing::getTotalCost();
+		}
+
 		function createListing($email){
 			$conn = DB();
 			$stmt = $conn->prepare("INSERT INTO listing (user_email, watch_reference, listing_condition,
@@ -138,29 +169,9 @@
 			$conn -> close();
 		}
 
-		function setListingImg1($img){
-			$this -> listing_img_1 = $img;
-		}
-
-		function getListingImg1(){
-			return $this -> listing_img_1;
-		}
-
-		function updateListingImg(){
-			$conn = DB();
-			$conn -> query("UPDATE listing SET listing_img_1 = '" . $this -> listing_img_1 . "' WHERE listing_id = '" . $this -> listing_id . "';");
-			$conn -> close();
-		}
-
-		function insertListingImgById($img, $listing_id){
-			// $conn = DB();
-			// $conn -> query("INSERT INTO listing_img ()SET listing_img_1 = '" . $img . "' WHERE listing_id = '" . $listing_id . "';");
-			// $conn -> close();
-		}
-
 		function getImages(){
 			$conn = DB();
-			$result = $conn -> query("SELECT img_name FROM listing_img WHERE listing_id = '" . $this -> listing_id . "';");
+			$result = $conn -> query("SELECT img_name FROM listing_img WHERE listing_id = '" . $this -> listing_id . "' ORDER BY main_img DESC;");
 			$conn -> close();
 
 			$active = 'active';
@@ -177,6 +188,28 @@
 				include('../views/parts/thumbnailImg.part.php');
 			}
 
+		}
+
+		static function hasImages($id){
+			$conn = DB();
+			$result = $conn -> query("SELECT img_name FROM listing_img WHERE listing_id = '" . $id . "';");
+			$conn -> close();
+
+			if($row = $result -> fetch_assoc()){
+				return true;
+			}
+			else return false;
+		}
+
+		static function hasMainImage($id){
+			$conn = DB();
+			$result = $conn -> query("SELECT img_name FROM listing_img WHERE listing_id = '" . $id . "' AND main_img = 1;");
+			$conn -> close();
+
+			if($row = $result -> fetch_assoc()){
+				return true;
+			}
+			else return false;
 		}
 		
 		function getListingByReference($id){
@@ -196,6 +229,8 @@
 				$this -> availability = $row['listing_available'];
 				$this -> email = $row['user_email'];
 				$this -> created = $row['listing_created'];
+				$this -> box = $row['listing_box'];
+				$this -> papers = $row['listing_papers'];
 			}
 		}
 

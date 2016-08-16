@@ -4,9 +4,14 @@
           /*border-radius: 0 !important;*/
 }
 
-body{
-	/*margin-top:3.6em;*/
-	background-color: #f1f1f1;
+.display-none{
+	display: none;
+}
+
+.no-rounded-corners{
+	-webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
 }
 
 .navbar {
@@ -153,7 +158,15 @@ body{
 
 .details-container{
 	margin-top: 2em;
+	/*height: 30em;*/
+	/*min-height: 50em;*/
+	/*min-height: 80%;*/
+	/*min-height: 80vh;*/
 	/*background-color: #fff;*/
+}
+
+#details-container{
+	/*height: 40em;*/
 }
 
 .details-container .form-group{
@@ -165,50 +178,8 @@ body{
 	border: none;
 }
 
-/* COLORS */
-.text-success{
-	color: #27ae60; /*Flat UI - Nephritis*/
-}
-
-.text-warning{
-	color: #f39c12; /*Flat UI - Orange*/
-}
-
-.text-danger{
-	color: #e74c3c; /*Flat UI - Alizarin*/
-}
-
-.btn-success{
-	background-color: #2ecc71; /*Flat UI - Emerald*/
-	border-color: #2ecc71; /*Flat UI - Emerald*/
-}
-
-.btn-success:hover{
-	background-color: #27ae60; /*Flat UI - Nephritis*/
-	border-color: #27ae60; /*Flat UI - Nephritis*/
-}
-
-.btn-primary{
-	background-color: #3498db; /*Flat UI - Peter River*/
-	border-color: #3498db; /*Flat UI - Peter River*/
-}
-
-.btn-primary:hover{
-	background-color: #2980b9; /*Flat UI - Belize Hole*/
-	border-color: #2980b9; /*Flat UI - Belize Hole*/
-}
-
-.confirmation{
-	background-color: #fff;
-	max-width: 30em;
-}
-
-.panel-body{
-	background-color: #fff;
-}
-
-.background-color-white{
-	background-color: #fff;
+.fa-star, .fa-star-half, .fa-star-half-o, .fa-star-o{
+	color: #f1c40f;
 }
 
 ul{
@@ -261,9 +232,53 @@ ul{
 	background-color: #f1f1f1;
 }
 
+#rightDiv{
+	padding-top: 9em;
+}
+
+/* SCREEN - MD */
+@media(max-width: 1199px){
+	#debugP{
+		color: blue;
+	}
+
+	#imageDiv{
+		/*padding-top: 4em;*/
+	}
+
+	#detailsImageCarousel .item, #detailsImageCarousel .item .active{
+		min-height: 31em;
+	}
+
+	#rightDiv{
+		padding-top: 7em;
+	}
+}
+
+/* SCREEN - SM */
+@media(max-width: 991px){
+	#debugP{
+		/*text-align: center;*/
+		color: red;
+	}
+
+	#imageDiv{
+		margin-top: 2em;
+	}
+
+	#detailsImageCarousel .item, #detailsImageCarousel .item .active{
+		min-height: 22em;
+	}
+
+	/*#rightDiv{
+		padding-top: 
+	}*/
+}
+
+/* SCREEN - XS */
 @media (max-width: 767px){
 	.navbar{
-		/*margin-bottom: 0.625em;*/
+		/*margin-bottom: 0.625em;
 	}
 
 	.navbar-form{
@@ -276,7 +291,7 @@ ul{
 
 	.login-form-container{
 		/*margin-top: -2em;*/
-		margin-top: 3em;
+		/*margin-top: 3em;*/
 	}
 
 	.add-listing-form-container{
@@ -287,5 +302,22 @@ ul{
 		margin-top: 1em;
 		padding-left: 0px;
 		padding-right: 0px;
+	}
+
+	#rightDiv{
+		/*padding-top: 2em !important;*/
+		padding-bottom: 2em;
+	}
+
+	#imageDiv{
+
+	}
+
+	#carouselItem{
+		min-height: 15em;
+	}
+
+	#debugP{
+		color: green;
 	}
 }

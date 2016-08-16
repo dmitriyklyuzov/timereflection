@@ -67,7 +67,7 @@
 		</div>
 
 		<div class="container-fluid padding-top-4em">
-			<div class="col-lg-3">
+			<div class="col-sm-3">
 				
 				<div class="panel panel-default">
 					<div class="panel-body">
@@ -89,7 +89,7 @@
 				</div>
 			</div>
 
-			<div class="col-lg-9">
+			<div class="col-sm-9">
 				<div class="main-content">
 					<div class="row multi-columns-row">
 

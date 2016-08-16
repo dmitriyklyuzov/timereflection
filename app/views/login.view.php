@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			
-			<div class="panel panel-default">
+			<div class="panel panel-default animated" id="loginPanel">
 				<div class="panel-heading">
 					<h2 class="text-center">Log in</h2>
 				</div>

@@ -76,7 +76,7 @@
 									<span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a href="logout">LOG OUT</a></li>
-										<li><a href="#">MY PROFILE</a></li>
+										<li><a href="admin">ADMIN PANEL</a></li>
 							    	</ul>
 								</li>
 							<?php }	?>

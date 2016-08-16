@@ -62,7 +62,7 @@
 		}
 
 		function setWatchRetail($r){
-			$this -> watch_retail =$r;
+			$this -> watch_retail = currencyToNumber($r);
 		}
 
 		function getWatchRetail(){
@@ -128,6 +128,7 @@
 				$this -> watch_model = $row['watch_model'];
 				$this -> watch_material = $row['watch_material'];
 				$this -> watch_retail = $row['watch_retail'];
+				$this -> watch_dial = $row['watch_dial'];
 			}
 		}
 	}

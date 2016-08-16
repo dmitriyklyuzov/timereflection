@@ -83,7 +83,9 @@
 <html>
 	<head>
 		<?php getHead('Test');?>
-		<script type="text/javascript" src="public/js/uploadImg.js"></script>
+		<!-- <script type="text/javascript" src="public/js/uploadImg.js"></script> -->
+		<script type="text/javascript" src="public/js/fileinput.js"></script>
+		<link rel="stylesheet" type="text/css" href="public/css/fileinput.css">
 	</head>
 	<body>
 
@@ -96,35 +98,21 @@
 
 		<p><?php echo $newListingId; ?></p>
 
-		<button class="btn btn-md btn-info" id="clickBtn" onclick="clickUpload();">Upload an image <span class="glyphicon glyphicon-camera"></span></button>
+		<div class="container add-listing-form-container">
 
-		<br>
-		<br>
+			<form action="test" method="POST" enctype="multipart/form-data">
+				<label class="control-label">Choose files to upload</label>
+				<input type="file" multiple id="input-24" name="input24[]" class="file-loading">
+			</form>
 
-		<form action="test" method="POST" enctype="multipart/form-data">
-			<!-- <label for="fileToUpload">Upload an image</label> -->
-			<input type="file" onchange="uploadImg()" class="input-md" name="fileToUpload" id="fileToUpload" style="display: none;">
-			<!-- <input type="submit" name="submit"> -->
-		</form>
+		</div>
 
-		Filename: <span id="filename"></span>
 		<script>
-			function clickUpload(){
-				$('#fileToUpload').click();
-				// $('#clickBtn').addClass('btn-success');
-				// $('#filename').text($('#fileToUpload').val());
-				// $('#fileToUpload').on('change', click2())
-
-
-			}
-
-			function click2(){
-				// alert($('#fileToUpload').val());
-				// $('#filename').text('click2 worked!');
-				$('#filename').text($('#fileToUpload').val());
-			}
-
-			// function upload(){}
+		$(document).on('ready', function() {
+			$("#input-24").fileinput({
+		        maxFileSize: 3078
+			});
+		});
 		</script>
 	</body>
 </html><?php ;}?>
