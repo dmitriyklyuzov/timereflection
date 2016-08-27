@@ -234,6 +234,66 @@
 			}
 		}
 
+		static function findListinsByKeyword($k){
+			$conn = DB();
+			$query = "SELECT * FROM listing INNER JOIN watch 
+						ON listing.watch_reference = watch.watch_reference 
+						WHERE watch_brand LIKE '%". $k . "%' 
+						OR watch_model LIKE '%". $k . "%' 
+						OR listing.watch_reference = '". $k . "';";
+			$result = $conn -> query($query);
+
+			return $result;
+		}
+
+		static function getMainImage($id){
+			
+			$conn = DB();
+			$result = $conn -> query("SELECT img_name FROM listing_img WHERE main_img = 1 AND listing_id = '" . $id . "';");
+			$conn -> close();
+
+			if($row = $result -> fetch_assoc()){
+				$img = $row['img_name'];
+				return $img;
+			}
+			else return false;
+
+		}
+
+		static function exists($id){
+
+			$conn = DB();
+			$result = $conn -> query("SELECT * FROM listing WHERE listing_id = '" . $id . "';");
+			$conn -> close();
+
+			if($row = $result -> fetch_assoc()){
+				return true;
+			}
+			else return false;
+		}
+
+		static function delete($id){
+			$conn = DB();
+			$conn -> query("DELETE FROM listing WHERE listing_id = '" . $id . "';");
+			$conn -> close();
+		}
+
+		static function deleteImages($id){
+
+			$conn = DB();
+			$result = $conn -> query("SELECT img_name FROM listing_img WHERE listing_id = '" . $id . "';");
+
+			// Delete files
+			while($row = $result -> fetch_assoc()){
+				$img_name = $row['img_name'];
+				unlink('../../public/img/watches/' . $img_name);				
+			}
+
+			// Delete links to files
+			$conn -> query("DELETE FROM listing_img WHERE listing_id = '" . $id . "';");
+			$conn -> close();
+		}
+
 	}
 
 ?>

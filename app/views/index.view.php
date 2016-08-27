@@ -24,7 +24,7 @@
 				<div class="item active" id="item-1">
 					<div class="carousel-caption">
 						<div class="shop-button">
-							<a href="#" class="transition-ease">BROWSE IWC</a>
+							<a href="http://localhost:8888/timereflection/brands/IWC" class="transition-ease">BROWSE IWC</a>
 						</div>
 					</div>
 				</div>
@@ -32,7 +32,7 @@
 				<div class="item" id="item-2">
 					<div class="carousel-caption">
 						<div class="shop-button">
-							<a href="#" class="transition-ease">BROWSE PANERAI</a>
+							<a href="http://localhost:8888/timereflection/brands/ROLEX" class="transition-ease">BROWSE ROLEX</a>
 						</div>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 				<div class="item" id="item-3">
 					<div class="carousel-caption">
 						<div class="shop-button">
-							<a href="#" class="transition-ease">BROWSE AUDEMARS PIGUET</a>
+							<a href="http://localhost:8888/timereflection/brands/AP" class="transition-ease">BROWSE AUDEMARS PIGUET</a>
 						</div>
 					</div>
 				</div>
@@ -48,7 +48,7 @@
 				<div class="item" id="item-4">
 					<div class="carousel-caption">
 						<div class="shop-button">
-							<a href="#" class="transition-ease">BROWSE PATEK PHILIPPE</a>
+							<a href="Patek" class="transition-ease">BROWSE PATEK PHILIPPE</a>
 						</div>
 					</div>
 				</div>
@@ -66,30 +66,43 @@
 			</div> 
 		</div>
 
-		<div class="container-fluid padding-top-4em">
+		<div class="container padding-top-4em">
 			<div class="col-sm-3">
-				
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<form action="">
-							<input type="text" class="form-control" placeholder="Search">
-						</form>
-					</div>
-				</div>
 				<div class="panel panel-default" id="navbox-left">
-					<!-- <div class="panel-heading"><h3>Brands</h3></div> -->
 					<div class="panel-body">
 						<ul class="padding-left-0em">
-							<li><a href="">Audemars-Piguet</a></li>
-							<li><a href="">Panerai</a></li>
-							<li><a href="">Patek Phillipe</a></li>
-							<li><a href="">Rolex</a></li>
+							<?php $r = Watch::getBrandList(); ?>
+							<?php while($row = $r -> fetch_assoc()): ?>
+								<li>
+									<a href="http://localhost:8888/timereflection/brands/<?php echo $row['watch_brand']; ?>">
+										<?php echo ucwords(strtolower($row['watch_brand'])); ?>
+									</a>
+								</li>
+							<?php endwhile; ?>
 						</ul>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-sm-9">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="btn-group" style="float:right">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by <span class="caret"></span></button>
+									<ul class="dropdown-menu">
+										<li><a href="">Date added</a></li>
+										<li><a href="">Price</a></li>
+									</ul>
+								</div>
+								<button class="btn btn-default" style="float:right; margin-right: 1em">
+									<span class="glyphicon glyphicon-sort"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="main-content">
 					<div class="row multi-columns-row">
 

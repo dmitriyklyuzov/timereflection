@@ -1,118 +1,42 @@
 <?php
-	
+
 	session_start();
+	// $errorMsg='';
 	include_once('../../lib/dependencies.php');
+	include_once('../models/user.php');
+	include_once('../models/watch.php');
 	include_once('../models/listing.php');
 
+	$user = new User();
 
-	$listing = new Listing();
-	$listing -> generateListingId();
-	$newListingId = $listing -> getListingId();
+	$watch = new Watch();
 
-	$newListingId = '57981a7718ff157981a7719000';
-
-	// check if the image is an actual image
-	if(isset($_FILES['fileToUpload']['name'])){
-
-		// directory where the files will be uploaded
-		$target_dir = '../../public/img/watches/';
-
-		// path of the file to be uploaded with the filename
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-
-		// echo 'target_file: ' . $target_file . '<br>';
-
-		// Holds the file extension of the file
-		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-
-		$check = getimagesize($_FILES['fileToUpload']['tmp_name']);
-
-		// Check if a file is an image
-		if($check !== false){
-			// echo 'File is an image - ' . $check['mime'] . '.<br>';
-			// Allow jpg or jpeg or gif
-			if($imageFileType == 'jpg' || $imageFileType == 'jpeg' || $imageFileType == 'jpg' || $imageFileType == 'png' || $imageFileType == 'gif'){
-				// Check if file doesn't exist
-				if(!file_exists($target_file)){
-					// fileName - file name without the path
-					$fileName = basename($_FILES['fileToUpload']['name']);
-					// echo 'Filename: ' . $fileName . '<br>';
-					// echo 'Listing Id: ' . $newListingId . '<br>';
-
-					if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)){
-
-						$conn = DB();
-						$conn -> query("INSERT INTO listing_img (listing_id, img_name, date_added) VALUES ('" . $newListingId . "', '" . $fileName . "', NOW());");
-						$conn -> close();
-
-						$conn = DB();
-						$result = $conn -> query("SELECT img_name FROM listing_img WHERE listing_id = '" . $newListingId . "';");
-						$conn -> close();
-
-						if($row = $result -> fetch_assoc()){
-							echo $row['img_name'];
-						}
-
-						// echo 'File ' . basename($_FILES['fileToUpload']['name']) . ' has been uploaded!<br>';
-					}
-					else echo 'Sorry, something went wrong.';
-				}
-				else{
-					echo 'Sorry, this file already exists!';
-				}
-			}
-			else{
-				echo 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.';
-			}
-		}
-		else{
-			echo 'Sorry, file is not an image.';
-		}
-
-		// $newListingId = '57a6b1fd015e057a6b1fd015f1';
+	// REDIRECT TO LOGIN IF NOT LOGGED IN
+	if(!User::isLoggedIn()){
+		$errorMsg = 'Please log in first.';
+		include ('../views/login.view.php');
+		exit();
 	}
 
-	else {
+	if(isset($_GET['action']) && isset($_GET['id'])){
+		// echo 'ID: ' . $_GET['id'];
+		$id = sanitize($_GET['id']);
+		// echoBr();
 
-
-
-
+		if(Listing::exists($id)){
+			// echo "listing exists.<br>";
+			Listing::deleteImages($id);
+			Listing::delete($id);
+			// echo 'Delete performed.<br>';
+			if(Listing::exists($id)){
+				echo 'Listing still exists :(<br>';
+			}
+			else{
+				// echo 'Listing deleted!<br>';
+				header('Location: http://localhost:8888/timereflection/');
+			}
+		}
+		else echo "listing you're trying to delete does not exist.<br>";
+	}
+	
 ?>
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<?php getHead('Test');?>
-		<!-- <script type="text/javascript" src="public/js/uploadImg.js"></script> -->
-		<script type="text/javascript" src="public/js/fileinput.js"></script>
-		<link rel="stylesheet" type="text/css" href="public/css/fileinput.css">
-	</head>
-	<body>
-
-		<br>
-		<br>
-
-		<div class="margin-top-4em"></div>
-
-		<img class="img-responsive" id="img-1" style="max-width: 400px; " src="">
-
-		<p><?php echo $newListingId; ?></p>
-
-		<div class="container add-listing-form-container">
-
-			<form action="test" method="POST" enctype="multipart/form-data">
-				<label class="control-label">Choose files to upload</label>
-				<input type="file" multiple id="input-24" name="input24[]" class="file-loading">
-			</form>
-
-		</div>
-
-		<script>
-		$(document).on('ready', function() {
-			$("#input-24").fileinput({
-		        maxFileSize: 3078
-			});
-		});
-		</script>
-	</body>
-</html><?php ;}?>

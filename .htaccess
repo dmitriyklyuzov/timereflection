@@ -25,13 +25,22 @@ RewriteRule ^add/list/([0-9a-zA-Z]+) app/controllers/listingController.php?listr
 RewriteRule ^add app/controllers/listingController.php [NC,L]
 
 # details
-RewriteRule ^details-([0-9a-zA-Z]+) app/controllers/detailsController.php?listingId=$1 [NC,L]
+RewriteRule ^details/([0-9a-zA-Z]+) app/controllers/detailsController.php?listingId=$1 [NC,L]
 
 #admin
 RewriteRule ^admin app/controllers/adminController.php [NC,L]
 
 #delete
-RewriteRule ^deleteImg app/controllers/deleteAllImages.php
+RewriteRule ^deleteImg app/controllers/deleteAllImages.php [NC,L]
+
+#results
+RewriteRule ^search?(.*)$ app/controllers/resultsController.php?s=$1 [NC,L,QSA]
+
+#brands
+RewriteRule ^brands/([0-9a-zA-Z]+) app/controllers/resultsController.php?s=$1 [NC,L]
+
+#delete
+RewriteRule ^delete/([0-9a-zA-Z]+) app/controllers/testController.php?action=delete&id=$1 [NC,L]
 
 # RewriteRule    ^$    public/    [L]
 # RewriteRule    (.*) public/$1    [L]

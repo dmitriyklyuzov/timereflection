@@ -62,12 +62,12 @@
 				</h4>
 				<p class="text-center <?php echo $text;?>"><?php echo $available;?></p>
 				<div class="text-center">
-					<button class="btn btn-dark-blue no-rounded-corners transition-ease"><h4 class="color-white">CONTACT ME</h4></button>	
+					<button class="btn btn-dark-blue no-rounded-corners transition-ease"><h4 class="color-white">CONTACT ME</h4></button>
 				</div>
 			</div>
 		</div>
 
-		<div class="container background-white margin-top-2em" style="">
+		<div class="container background-white margin-top-2em">
 			<div class="col-sm-6 col-xs-12 background-white">
 			<h3 class="">DETAILS</h3>
 			<br>
@@ -149,6 +149,15 @@
 				</table>
 			</div>
 		</div>
+
+		<? if(User::isLoggedIn()): ?>
+		<div class="container background-white margin-top-2em margin-bottom-2em padding-top-1em padding-bottom-1em">
+			<div class="col-sm-6 col-xs-12 background-white">
+				<a href="http://localhost:8888/timereflection/delete/<?php echo $listing->getListingId(); ?>">Delete</a>
+			</div>
+		</div>
+		<?php endif; ?>
+
 		<script>
 			// window.onload = centerChildDiv('#imageDiv', '#rightDiv');
 			// window.onresize = centerChildDiv('#imageDiv', '#rightDiv');

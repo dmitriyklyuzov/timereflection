@@ -70,5 +70,5 @@ function listWatch(){
 				"&notes="+notes+
 				"&availability="+availability+
 				"&box="+box+
-				"&papers"+papers);
+				"&papers="+papers);
 }

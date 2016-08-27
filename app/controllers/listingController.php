@@ -12,7 +12,7 @@
 	$watch = new Watch();
 
 	// REDIRECT TO LOGIN IF NOT LOGGED IN
-	if(!isLoggedIn()){
+	if(!User::isLoggedIn()){
 		$errorMsg = 'Please log in first.';
 		include ('../views/login.view.php');
 		exit();
@@ -71,7 +71,7 @@
 
 							// echo 'File ' . basename($_FILES['img']['name']) . ' has been uploaded!<br>';
 
-							header('Location: details-'. $newListingId);
+							header('Location: details/'. $newListingId);
 						}
 						else echo 'Sorry, something went wrong.';
 					}
@@ -151,6 +151,8 @@
 
 			}
 			else{
+
+				// PLS remember that POST variables are only set if they are transfered via listWatch.js ajax!!!
 
 				// Need to create a new watch
 				debugMsg('Watch does not exist');

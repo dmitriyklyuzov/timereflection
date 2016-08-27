@@ -7,7 +7,7 @@
 	$user = new User();
 
 	if(isset($_GET['action'])){
-		if($_GET['action']=='logout' && isLoggedIn()){
+		if($_GET['action']=='logout' && User::isLoggedIn()){
 			session_destroy();
 		}
 		header('Location: index');

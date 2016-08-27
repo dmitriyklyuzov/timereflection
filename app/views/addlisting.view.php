@@ -184,6 +184,8 @@
 							<input type="submit" name="submit" class="btn btn-success" value="Next">
 						</div>
 
+						<!-- PLS remember that POST vars used in this form are submitted through listWatch.js -->
+
 					</form>
 
 				</div> <!-- panel-body -->

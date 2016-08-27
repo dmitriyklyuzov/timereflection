@@ -13,7 +13,7 @@
 			$_SESSION['name']=$n;
 		}
 
-		function getName(){
+		static function getName(){
 			if(isset($_SESSION['name']) && !empty($_SESSION['name']) && $_SESSION['name'] != ''){
 				return $_SESSION['name'];
 			}
@@ -75,7 +75,7 @@
 			$_SESSION['logged_in']=true;
 		}
 
-		function isLoggedIn(){
+		static function isLoggedIn(){
 			if(isset($_SESSION['logged_in'])){
 				if($_SESSION['logged_in']){
 					return true;

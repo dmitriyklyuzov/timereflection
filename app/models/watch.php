@@ -9,9 +9,9 @@
 		private $watch_retail = '';
 		private $watch_dial = '';
 
-		function getBrandList(){
+		static function getBrandList(){
 			$conn = DB();
-			$result = $conn -> query("SELECT DISTINCT watch_brand FROM watch;");
+			$result = $conn -> query("SELECT DISTINCT watch_brand FROM watch INNER JOIN listing on watch.watch_reference = listing.watch_reference;");
 			$conn -> close();
 			return $result;
 		}

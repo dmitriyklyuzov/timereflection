@@ -15,7 +15,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 background-gray">
 				<div class="row">
 					<div class="col-lg-12 padding-top-1em background-white clearfix">
-						<img src="public/img/watches/rolex-daytona-2.jpg" class="img-responsive" alt="IWC">
+						<img src="http://localhost:8888/timereflection/public/img/watches/rolex-daytona-2.jpg" class="img-responsive" alt="IWC">
 					</div>	
 				</div>
 				
