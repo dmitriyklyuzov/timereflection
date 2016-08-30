@@ -31,7 +31,7 @@
 			$price = $row['listing_price'];
 			$available = '';
 			$text = '';
-			$new_used = ($row['listing_new_used'] == '1') ? 'New' : 'Used';
+			$new_used = ($row['listing_new_used'] == '1') ? 'New' : 'Pre-owned';
 			
 			if ($row['listing_available']=='1') {
 				$available = 'Available';
@@ -54,20 +54,6 @@
 			// New / Used
 			// 1 - New
 			// 2 - Used
-
-			$stars = '';
-
-			for($i=1; $i<=$condition/2; $i++){
-				$stars = $stars . '<i class="fa fa-star"></i>';
-			}
-			if($condition%2==1){
-				$stars = $stars . '<i class="fa fa-star-half-o"></i>';
-			}
-			if(10-$condition!=0){
-				for($i=1; $i<=(10-$condition)/2; $i++){
-					$stars = $stars . '<i class="fa fa-star-o"></i>';
-				}
-			}
 
 			$imgSrc = 'http://placehold.it/300?text=IMAGE+NOT+AVAILABLE';
 

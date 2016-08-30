@@ -8,12 +8,13 @@
 	// Libraries
 	include_once 'securityFunctions.php';
 	include_once 'adminFunctions.php';
+	include_once 'generalFunctions.php';
 	include_once 'debug.php';
 
 	// Database
 	include_once '../../db/database.php';
 	
 	// Settings
-	include_once ('../../settings.php');
+	include_once '../../settings.php';
 
 ?>

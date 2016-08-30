@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php getHead($brand . ' ' . $model); ?>
+		<?php getHead(toCamelCase($brand . ' ' . $model)); ?>
 		<script type="text/javascript" src="public/js/centerChildDiv.js"></script>
 	</head>
 
@@ -52,9 +52,9 @@
 			
 			<!-- DETAILS -->
 			<div class="col-sm-7 col-xs-12 clearfix" id="rightDiv">
-				<h3 class="text-center"><?php echo $brand . ' ' . $model; ?></h3>
+				<h3 class="text-center"><?php echo toCamelCase($brand . ' ' . $model); ?></h3>
 				<p class="text-center text-muted">
-					<?php echo $stars; ?>&nbsp(<?php echo $new_used; ?>)
+					<?php echo $condition.'/10 ('.$new_used.')'; ?>
 				</p>
 				<h4 class="text-center">
 					<span class="text-muted">Price: </span>
@@ -62,7 +62,21 @@
 				</h4>
 				<p class="text-center <?php echo $text;?>"><?php echo $available;?></p>
 				<div class="text-center">
-					<button class="btn btn-dark-blue no-rounded-corners transition-ease"><h4 class="color-white">CONTACT ME</h4></button>
+					<button class="btn btn-dark-blue no-rounded-corners transition-ease">
+						<a href="mailto:irina@timereflectioninc.com?
+						subject=Inquiry for <?php echo toCamelCase($brand . ' ' . $model); ?>&amp;
+						body=Hi, %0D%0A%0D%0AI am interested in this listing. Please contact me with more information.
+						%0D%0A%0D%0A
+						http://localhost:8888<?php echo $_SERVER['REQUEST_URI']; ?>
+						%0D%0A%0D%0A
+						Best,
+						%0D%0A" style="text-decoration: none;">
+							<h4 class='color-white'>CLICK TO INQUIRE</h4>
+						</a>
+					</button>
+
+					<!-- <button class="btn btn-dark-blue no-rounded-corners transition-ease"><h4 class="color-white">CLICK TO INQUIRE</h4></button> -->
+
 				</div>
 			</div>
 		</div>

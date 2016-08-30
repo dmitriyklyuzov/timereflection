@@ -29,7 +29,7 @@
 			$box = $listing -> getBox();
 			$papers = $listing -> getPapers();
 
-			$new_used = ($new_used == '1') ? 'New / Unworn' : 'Used';
+			$new_used = ($new_used == '1') ? 'New / Unworn' : 'Pre-owned';
 
 			if ($available=='1') {
 				$available = 'Available';
@@ -41,20 +41,6 @@
 			else {
 				$available = 'Sold';
 				$text = 'text-danger';
-			}
-
-			$stars = '';
-
-			for($i=1; $i<=$condition/2; $i++){
-				$stars = $stars . '<i class="fa fa-star"></i>';
-			}
-			if($condition%2==1){
-				$stars = $stars . '<i class="fa fa-star-half-o"></i>';
-			}
-			if(10-$condition!=0){
-				for($i=1; $i<=(10-$condition)/2; $i++){
-					$stars = $stars . '<i class="fa fa-star-o"></i>';
-				}
 			}
 
 			$watch = new Watch();

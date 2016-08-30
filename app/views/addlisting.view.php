@@ -124,7 +124,9 @@
 
 						<!-- Price -->
 						<div class="form-group">
-							<label for="price">My price</label>
+							<label for="price">To sell</label> 
+							<!-- <label for="price">My price</label> -->
+							<!-- Renamed from "My price" to "To sell" as per Ira's request -->
 							<div class="input-group">
 								<div class="input-group-addon">$</div>
 								<input name="price" id="price-input" class="form-control" type="text">
@@ -143,7 +145,8 @@
 								<input type="radio" name="new_used" value="1" ><span class="text-success">New</span>
 							</label>
 							<label class="radio-inline">
-								<input type="radio" name="new_used" value="2" checked><span class="text-warning">Used</span>
+								<input type="radio" name="new_used" value="2" checked><span class="text-warning">Pre-Owned</span>
+								<!-- Renamed from "Used" to "Pre-owned" -->
 							</label>
 						</div>
 

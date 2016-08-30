@@ -8,8 +8,10 @@
 
 	if(isset($_GET['s'])){
 		$search = $_GET['s'];
+		echo $_GET['s'];
 		unset($_GET['s']);
 		sanitize($search);
+		$search = str_replace("%20", " ", $search);
 
 		if($search == ''){
 			echo 'Search is empty<br>';
@@ -30,7 +32,7 @@
 				$price = $row['listing_price'];
 				$available = '';
 				$text = '';
-				$new_used = ($row['listing_new_used'] == '1') ? 'New' : 'Used';
+				$new_used = ($row['listing_new_used'] == '1') ? 'New' : 'Pre-owned';
 
 				if ($row['listing_available']=='1') {
 					$available = 'Available';
@@ -48,21 +50,7 @@
 				$imgSrc = 'http://placehold.it/300?text=IMAGE+NOT+AVAILABLE';
 
 				if($img = Listing::getMainImage($listing_id)){
-					$imgSrc = 'public/img/watches/' . $img;
-				}
-
-				$stars = '';
-
-				for($i=1; $i<=$condition/2; $i++){
-					$stars = $stars . '<i class="fa fa-star"></i>';
-				}
-				if($condition%2==1){
-					$stars = $stars . '<i class="fa fa-star-half-o"></i>';
-				}
-				if(10-$condition!=0){
-					for($i=1; $i<=(10-$condition)/2; $i++){
-						$stars = $stars . '<i class="fa fa-star-o"></i>';
-					}
+					$imgSrc = 'http://localhost:8888/timereflection/public/img/watches/' . $img;
 				}
 
 				include('../views/parts/thumbnail.part.php');

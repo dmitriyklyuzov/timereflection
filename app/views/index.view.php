@@ -72,9 +72,10 @@
 					<div class="panel-body">
 						<ul class="padding-left-0em">
 							<?php $r = Watch::getBrandList(); ?>
-							<?php while($row = $r -> fetch_assoc()): ?>
+							<?php while($row = $r -> fetch_assoc()): 
+									$brand_name = str_replace(" ", "%20", $row['watch_brand']);?>
 								<li>
-									<a href="http://localhost:8888/timereflection/brands/<?php echo $row['watch_brand']; ?>">
+									<a href="http://localhost:8888/timereflection/brands/<?php echo $brand_name; ?>">
 										<?php echo ucwords(strtolower($row['watch_brand'])); ?>
 									</a>
 								</li>

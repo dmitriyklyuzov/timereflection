@@ -2,7 +2,7 @@
 	<div class="thumbnail no-rounded-corners">
 		<p class="text-center padding-top-1em"><?php echo $brand.' '.$model?></p>
 		<hr>
-		<a href="details/<?php echo $listing_id; ?>">
+		<a href="http://localhost:8888/timereflection/details/<?php echo $listing_id; ?>">
 			<img src="<?php echo $imgSrc; ?>">
 		</a>
 		<!-- <hr> -->
@@ -11,7 +11,7 @@
 			<!-- <p><b>Brand:</b> <?php echo $brand; ?></p> -->
 			<!-- <p><b>Model:</b> <?php echo $model; ?></p> -->
 			<!-- <p><b>Ref #:</b> <?php echo $ref; ?></p> -->
-			<p class="text-center"><?php echo $stars; ?>&nbsp(<?php echo $new_used; ?>)</p>
+			<p class="text-center"><?php echo $new_used ?>&nbsp(<?php echo $condition . '/10'; ?>)</p>
 			<!-- <br> -->
 			<p></p>
 			<!-- <p>Retail: <b>$<?php echo number_format($retail); ?></b></p> -->
