@@ -40,7 +40,7 @@ RewriteRule ^search?(.*)$ app/controllers/resultsController.php?s=$1 [NC,L,QSA]
 RewriteRule ^brands/([0-9a-zA-Z]+) app/controllers/resultsController.php?s=$1 [NC,L]
 
 #delete
-RewriteRule ^delete/([0-9a-zA-Z]+) app/controllers/testController.php?action=delete&id=$1 [NC,L]
+RewriteRule ^delete/([0-9a-zA-Z]+) app/controllers/listingController.php?action=delete&reference=$1 [NC,L]
 
 # RewriteRule    ^$    public/    [L]
 # RewriteRule    (.*) public/$1    [L]

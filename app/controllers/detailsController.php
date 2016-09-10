@@ -22,13 +22,19 @@
 			$new_used = $listing -> getNewUsed();
 			$available = $listing -> getAvailability();
 			$text = 'text-success';
-			$price = number_format($listing -> getPrice());
-			// $price_formatted
+			$price = '';
+			if($listing -> getPrice()!=''){
+				$price = number_format($listing -> getPrice());
+			}
 			$reference = $listing -> getListingReference();
 			$notes = $listing -> getNotes();
 			$box = $listing -> getBox();
 			$papers = $listing -> getPapers();
-
+			$dial = $listing -> getDial();
+			$retail = '';
+			if($listing -> getRetail()!=''){
+				$retail = number_format($listing -> getRetail());
+			}
 			$new_used = ($new_used == '1') ? 'New / Unworn' : 'Pre-owned';
 
 			if ($available=='1') {
@@ -49,9 +55,6 @@
 
 			$brand = $watch -> getWatchBrand();
 			$model = $watch -> getWatchModel();
-			$retail = number_format($watch -> getWatchRetail());
-			$dial = $watch -> getWatchDial();
-			// $retail_formatted = number_format($retail);
 			$material = $watch -> getWatchMaterial();
 
 			include('../views/details.view.php');

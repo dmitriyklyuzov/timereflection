@@ -81,7 +81,7 @@
 			</div>
 		</div>
 
-		<div class="container background-white margin-top-2em">
+		<div class="container background-white margin-top-2em margin-bottom-2em">
 			<div class="col-sm-6 col-xs-12 background-white">
 			<h3 class="">DETAILS</h3>
 			<br>
@@ -113,7 +113,7 @@
 						</tr>
 						<tr class="visible-xs">
 							<td><b>DIAL</b></td>
-							<td><?php echo 'CHAMP STICK'; ?></td>
+							<td><?php echo $dial; ?></td>
 						</tr>
 						<tr class="visible-xs">
 							<td><b>CONDITION</b></td>
@@ -121,11 +121,11 @@
 						</tr>
 						<tr class="visible-xs">
 							<td><b>BOX</b></td>
-							<td><?php echo 'NO'; ?></td>
+							<td><?php echo $box; ?></td>
 						</tr>
 						<tr class="visible-xs">
 							<td><b>PAPERS</b></td>
-							<td><?php echo 'NO'; ?></td>
+							<td><?php echo $papers; ?></td>
 						</tr>
 						<tr class="visible-xs">
 							<td><b>NOTES</b></td>
@@ -171,11 +171,6 @@
 			</div>
 		</div>
 		<?php endif; ?>
-
-		<script>
-			// window.onload = centerChildDiv('#imageDiv', '#rightDiv');
-			// window.onresize = centerChildDiv('#imageDiv', '#rightDiv');
-		</script>
 		
 	</body>
 </html>

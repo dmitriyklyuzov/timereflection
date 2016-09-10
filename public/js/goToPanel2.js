@@ -1,5 +1,4 @@
 function goToPanel2(){
-	// var panel1Height = $('#panel1').height();
 	$('#panel1').addClass('fadeOutLeftBig').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 		// $('#panel1').css('margin-top', '-'+panel1Height+'px');
 		$('#panel1').css('display', 'none');

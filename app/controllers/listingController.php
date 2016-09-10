@@ -108,19 +108,33 @@
 				$brand = $row['watch_brand'];
 				$model = $row['watch_model'];
 				$material = $row['watch_material'];
-				$dial = $row['watch_dial'];
-				$retail = number_format($row['watch_retail']);
-				
+				$caseSize = $row['watch_case_size'];
 
 				$watch -> setWatchBrand($brand);
 				$watch -> setWatchModel($model);
 				$watch -> setWatchMaterial($material);
-				$watch -> setWatchRetail($retail);
-				$watch -> setWatchDial($dial);
+				$watch -> setWatchCaseSize($caseSize);
 
 				include ('../views/parts/foundWatch.part.php');
 			}
 			else echo '0';
+		}
+
+		if($action == 'delete'){
+
+			if(Listing::exists($ref)){
+				Listing::deleteImages($ref);
+				Listing::delete($ref);
+				if(Listing::exists($ref)){
+					// listing not deleted
+					echo 'Listing still exists :(<br>';
+				}
+				else{
+					// listing deleted
+					header('Location: http://localhost:8888/timereflection/');
+				}
+			}
+			else echo "listing you're trying to delete does not exist.<br>";
 		}
 		exit();
 	}
@@ -140,9 +154,6 @@
 			$listing -> setListingReference($ref);
 			$watch -> setWatchReference($ref);
 
-			debugMsg('OK: Variable exists and != ""');
-			debugMsg('OUTPUT: ref: '. $listing -> getListingReference());
-
 			$result = $watch -> findWatch($ref);
 
 			if($row = $result -> fetch_assoc()){
@@ -155,8 +166,6 @@
 				// PLS remember that POST variables are only set if they are transfered via listWatch.js ajax!!!
 
 				// Need to create a new watch
-				debugMsg('Watch does not exist');
-				// echo "watch does not exist<br>";
 
 				if(isset($_POST['brand'])){
 					debugMsg('OK: brand is set');
@@ -174,18 +183,6 @@
 					debugMsg('OK: material is set');
 					$material = sanitize($_POST['material']);
 					$watch -> setWatchMaterial($material);
-				}
-
-				if(isset($_POST['retail'])){
-					debugMsg('OK: retail is set');
-					$retail = sanitize($_POST['retail']);
-					$watch -> setWatchRetail($retail);
-				}
-
-				if(isset($_POST['dial'])){
-					debugMsg('OK: dial is set');
-					$dial = sanitize($_POST['dial']);
-					$watch -> setWatchDial($dial);
 				}
 
 				$watch -> generateWatchId();
@@ -248,6 +245,18 @@
 				$listing -> setPapers($papers);
 			}
 
+			if(isset($_POST['retail'])){
+				debugMsg('OK: retail is set');
+				$retail = sanitize($_POST['retail']);
+				$listing -> setRetail($retail);
+			}
+
+			if(isset($_POST['dial'])){
+				debugMsg('OK: dial is set');
+				$dial = sanitize($_POST['dial']);
+				$listing -> setDial($dial);
+			}
+
 			$listing -> generateListingId();
 
 			$listing -> createListing($user -> getEmail());
@@ -265,4 +274,5 @@
 	}
 
 	else include ('../views/addlisting.view.php');
+
 ?>

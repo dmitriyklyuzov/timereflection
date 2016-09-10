@@ -27,7 +27,6 @@
 							<h4>Rolex Submariner Date</h4>
 							<p>Reference: 16610</p>
 							<p>Material: Ceramic</p>
-							<p>Dial: Black</p>
 							<p>Retail: $6000</p>
 							
 						</ul>

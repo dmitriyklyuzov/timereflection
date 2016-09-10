@@ -14,8 +14,7 @@
 						<h4><?php echo $brand . ' ' . $model; ?></h4>
 						<p>Reference: <?php echo $ref; ?></p>
 						<p>Material: <?php echo $material; ?></p>
-						<p>Dial: <?php echo $dial; ?></p>
-						<p>Retail: $<?php echo $retail; ?></p>
+						<p>Case size: <?php echo $caseSize . 'mm'; ?></p>
 					</ul>
 				</div>
 
@@ -26,14 +25,13 @@
 						'<?php echo $brand ?>',
 						'<?php echo $model ?>',
 						'<?php echo $material ?>',
-						'<?php echo $dial ?>',
-						'<?php echo $retail ?>'); goToPanel2();">YES</button>
+						'<?php echo $caseSize ?>'); goToPanel2();">YES</button>
 
 						<button class="btn btn-danger margin-left-2em" type="button" data-dismiss="modal" onclick="incrementRef(); goToPanel2();">NO</button>
 						<!-- <a href="add" class="btn btn-danger margin-left-2em" data-dismiss="modal" onclick="incrementRef()">NO</a> -->
 					</div>
 				</div>
-
+				
 			</div>
 		</div>
 	</div>

@@ -20,17 +20,29 @@
 		while($row = $result -> fetch_assoc()){
 
 			$listing_id = $row['listing_id'];
+
 			$brand = $row['watch_brand'];
 			$model = $row['watch_model'];
-			// $ref = $row['listing_reference_number'];
-			$retail  = $row['watch_retail'];
-			$material = $row['watch_material'];
-			$condition = $row['listing_condition'];
-			$notes = $row['listing_notes'];
+			$ref = $row['watch_reference'];
 			$sku = $row['listing_SKU'];
-			$price = $row['listing_price'];
+			$retail  = '';
+			if($row['listing_retail']!=''){
+				$retail = number_format($row['listing_retail']);
+			}
+			$material = $row['watch_material'];
+			$dial = $row['listing_dial'];
+			$caseSize = $row['watch_case_size'];
+			$condition = $row['listing_condition'];
+			$box = ($row['listing_box'] == '1') ? 'YES' : 'NO';
+			$papers = ($row['listing_papers'] == '1') ? 'YES' : 'NO';
+			$notes = $row['listing_notes'];
+			$price = '';
+			if($row['listing_price']!=''){
+				$price = number_format($row['listing_price']);
+			}
 			$available = '';
 			$text = '';
+			
 			$new_used = ($row['listing_new_used'] == '1') ? 'New' : 'Pre-owned';
 			
 			if ($row['listing_available']=='1') {

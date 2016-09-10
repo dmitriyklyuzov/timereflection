@@ -31,6 +31,9 @@
 		private $listing_img_1 = '';
 		private $box = '';
 		private $papers = '';
+		private $retail = '';
+		private $dial = '';
+
 
 		function generateListingId(){
 			$this -> listing_id = uniqid(uniqid());
@@ -109,7 +112,8 @@
 		}
 
 		function getBox(){
-			return $this -> box;
+			// return $this -> box;
+			return ($this -> box == '1') ? 'YES' : 'NO';
 		}
 
 		function setPapers($p){
@@ -117,7 +121,24 @@
 		}
 
 		function getPapers(){
-			return $this -> papers;
+			// return $this -> papers;
+			return ($this -> papers == '1') ? 'YES' : 'NO';
+		}
+
+		function setDial($d){
+			$this -> dial = $d;
+		}
+
+		function getDial(){
+			return $this -> dial;
+		}
+
+		function setRetail($r){
+			$this -> retail = currencyToNumber($r);
+		}
+
+		function getRetail(){
+			return $this -> retail;
 		}
 
 		static function getTotalCount(){
@@ -156,12 +177,14 @@
 			$stmt = $conn->prepare("INSERT INTO listing (user_email, watch_reference, listing_condition,
 														listing_notes, listing_sku, listing_available,
 														listing_price, listing_new_used, listing_our_cost,
+														listing_dial, listing_retail,
 														listing_box, listing_papers, 
 														listing_id, listing_created)
-									VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");		
+									VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");		
 			$stmt->bind_param("ssssssssssss", $email, $this -> reference, $this -> condition,
 											$this -> notes, $this -> SKU, $this -> availability, 
 											$this -> price, $this -> new_used, $this -> cost,
+											$this -> dial, $this -> retail,
 											$this -> box, $this -> papers, $this -> listing_id);
 			
 			$stmt -> execute();
@@ -229,6 +252,8 @@
 				$this -> availability = $row['listing_available'];
 				$this -> email = $row['user_email'];
 				$this -> created = $row['listing_created'];
+				$this -> retail = $row['listing_retail'];
+				$this -> dial = $row['listing_dial'];
 				$this -> box = $row['listing_box'];
 				$this -> papers = $row['listing_papers'];
 			}
