@@ -3,6 +3,45 @@
 	<head>
 		<?php getHead(toCamelCase($brand . ' ' . $model)); ?>
 		<script type="text/javascript" src="public/js/centerChildDiv.js"></script>
+		<!-- <script type="text/javascript" src="public/js/contentEdit.js"></script> -->
+		<script type="text/javascript">
+			function saveToDB(id, field, value){
+				$.ajax({
+					url: "http://localhost:8888/timereflection/app/controllers/testController.php",
+					type: "POST",
+					data: 'action=update&id='+id+'&field='+field+'&value='+value,
+					success: function(result){
+						if(result=='true'){
+							$('#'+field).css("background", "#2ecc71");
+							$('#'+field).css("color", "#FFF");
+
+							setTimeout(
+								function(){
+
+									$('#'+field).css("background", "#FFF");
+									$('#'+field).css("color", "#000");
+
+								}, 1000
+							)
+						}
+						else{
+							// alert('No success this time :(');
+							$('#'+field).css("background", "#e74c3c");
+							$('#'+field).css("color", "#FFF");
+
+							setTimeout(
+								function(){
+
+									$('#'+field).css("background", "#FFF");
+									$('#'+field).css("color", "#000");
+
+								}, 1000
+							)
+						}
+					}
+				});
+			}
+		</script>
 	</head>
 
 	<body style="">
@@ -58,7 +97,7 @@
 				</p>
 				<h4 class="text-center">
 					<span class="text-muted">Price: </span>
-					<span class="text-danger">$<?php echo $price;?></span>
+					<span class="text-danger" id="listing_price" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);">$<?php echo $price;?></span>
 				</h4>
 				<p class="text-center <?php echo $text;?>"><?php echo $available;?></p>
 				<div class="text-center">
@@ -89,11 +128,11 @@
 					<tbody>
 						<tr>
 							<td><b>BRAND</b></td>
-							<td contenteditable="true"><?php echo $brand; ?></td>
+							<td id="watch_brand" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $brand; ?></td>
 						</tr>
 						<tr>
 							<td><b>MODEL</b></td>
-							<td><?php echo $model; ?></td>
+							<td id="watch_model" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $model; ?></td>
 						</tr>
 						<tr>
 							<td><b>REFERENCE</b></td>
@@ -101,23 +140,27 @@
 						</tr>
 						<tr>
 							<td><b>SKU</b></td>
-							<td><?php echo $sku; ?></td>
+							<td id="listing_sku" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $sku; ?></td>
 						</tr>
 						<tr>
 							<td><b>RETAIL</b></td>
-							<td>$<?php echo $retail; ?></td>
+							<td id="listing_retail" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);">$<?php echo $retail; ?></td>
 						</tr>
 						<tr>
 							<td><b>MATERIAL</b></td>
-							<td><?php echo $material; ?></td>
+							<td id="watch_material" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $material; ?></td>
 						</tr>
 						<tr class="visible-xs">
-							<td><b>DIAL</b></td>
-							<td><?php echo $dial; ?></td>
+							<td id="dial"><b>DIAL</b></td>
+							<td id="listing_dial" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $dial; ?></td>
 						</tr>
 						<tr class="visible-xs">
 							<td><b>CONDITION</b></td>
 							<td><?php echo $condition.'/10 ('.$new_used.')'; ?></td>
+						</tr>
+						<tr class="visible-xs">
+							<td><b>CASE SIZE</b></td>
+							<td id="watch_case_size" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $caseSize.'mm'; ?></td>
 						</tr>
 						<tr class="visible-xs">
 							<td><b>BOX</b></td>
@@ -129,7 +172,7 @@
 						</tr>
 						<tr class="visible-xs">
 							<td><b>NOTES</b></td>
-							<td contenteditable="true"><?php echo $notes; ?></td>
+							<td id="listing_notes" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $notes; ?></td>
 						</tr>
 					</tbody>
 				</table>
@@ -141,15 +184,20 @@
 					<tbody>
 						<tr>
 							<td><b>DIAL</b></td>
-							<td><?php echo $dial; ?></td>
+							<td id="listing_dial" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $dial; ?></td>
 						</tr>
 						<tr>
 							<td><b>CONDITION</b></td>
 							<td><?php echo $condition.'/10 ('.$new_used.')'; ?></td>
 						</tr>
 						<tr>
+							<td><b>CASE SIZE</b></td>
+							<td id="watch_case_size" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $caseSize.'mm'; ?></td>
+						</tr>
+
+						<tr>
 							<td><b>BOX</b></td>
-							<td><?php echo $box; ?></td>
+							<td ><?php echo $box; ?></td>
 						</tr>
 						<tr>
 							<td><b>PAPERS</b></td>
@@ -157,7 +205,7 @@
 						</tr>
 						<tr>
 							<td><b>NOTES</b></td>
-							<td contenteditable="true"><?php echo $notes; ?></td>
+							<td id="listing_notes" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $notes; ?></td>
 						</tr>
 					</tbody>
 				</table>
@@ -165,6 +213,36 @@
 		</div>
 
 		<? if(User::isLoggedIn()): ?>
+
+		<!-- Admin-only info -->
+		<div class="container background-white margin-top-2em margin-bottom-2em padding-top-1em padding-bottom-1em">
+			<div class="col-sm-6 col-xs-12 background-white">
+				<h3 class="">DETAILS</h3>
+				<br>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td><b>SERIAL</b></td>
+							<td id="listing_serial" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $serial; ?></td>
+						</tr>
+						<tr>
+							<td><b>OUR COST</b></td>
+							<td id="listing_our_cost" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);">$<?php echo $cost; ?></td>
+						</tr>
+						<tr>
+							<td><b>LISTED ON</b></td>
+							<td><?php echo $listedOn; ?></td>
+						</tr>
+						<tr>
+							<td><b>LISTED BY</b></td>
+							<td><?php echo $listedBy; ?></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Controls -->
 		<div class="container background-white margin-top-2em margin-bottom-2em padding-top-1em padding-bottom-1em">
 			<div class="col-sm-6 col-xs-12 background-white">
 				<a href="http://localhost:8888/timereflection/delete/<?php echo $listing->getListingId(); ?>">Delete</a>

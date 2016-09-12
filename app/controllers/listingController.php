@@ -185,6 +185,12 @@
 					$watch -> setWatchMaterial($material);
 				}
 
+				if(isset($_POST['caseSize'])){
+					debugMsg('OK: caseSize is set');
+					$material = sanitize($_POST['caseSize']);
+					$watch -> setWatchCaseSize($caseSize);
+				}
+
 				$watch -> generateWatchId();
 
 				$watch -> createWatch($user -> getEmail());
@@ -255,6 +261,11 @@
 				debugMsg('OK: dial is set');
 				$dial = sanitize($_POST['dial']);
 				$listing -> setDial($dial);
+			}
+
+			if(isset($_POST['serial'])){
+				$serial = sanitize($_POST['serial']);
+				$listing -> setSerial($serial);
 			}
 
 			$listing -> generateListingId();

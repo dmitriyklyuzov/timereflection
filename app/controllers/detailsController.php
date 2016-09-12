@@ -31,12 +31,21 @@
 			$box = $listing -> getBox();
 			$papers = $listing -> getPapers();
 			$dial = $listing -> getDial();
+			$serial = $listing -> getSerial();
+			$listedOn = $listing -> getDate();
+			$listedBy = User::getFirstName($listing -> getEmail());
+			
+			$cost = '';
+			if($listing -> getCost()!=''){
+				$cost = number_format($listing -> getCost());
+			}
+
 			$retail = '';
 			if($listing -> getRetail()!=''){
 				$retail = number_format($listing -> getRetail());
 			}
-			$new_used = ($new_used == '1') ? 'New / Unworn' : 'Pre-owned';
 
+			$new_used = ($new_used == '1') ? 'New / Unworn' : 'Pre-owned';
 			if ($available=='1') {
 				$available = 'Available';
 			}
@@ -56,6 +65,7 @@
 			$brand = $watch -> getWatchBrand();
 			$model = $watch -> getWatchModel();
 			$material = $watch -> getWatchMaterial();
+			$caseSize = $watch -> getWatchCaseSize();
 
 			include('../views/details.view.php');
 		}

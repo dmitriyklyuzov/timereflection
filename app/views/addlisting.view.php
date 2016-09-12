@@ -99,6 +99,12 @@
 							<label for="caseSize">Case size</label>
 							<input name="caseSize" id="caseSize-input" class="form-control" type="text">
 						</div>
+						
+						<!-- Serial -->
+						<div class="form-group">
+							<label for="serial">Serial</label>
+							<input name="serial" id="serial-input" class="form-control" type="text">
+						</div>
 
 						<!-- Condition -->
 						<div class="form-group">

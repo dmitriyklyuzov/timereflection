@@ -8,6 +8,30 @@
 		private $watch_material = '';
 		private $watch_case_size = '';
 
+		static function exists($id){
+
+			$conn = DB();
+			$result = $conn -> query("SELECT * FROM watch WHERE watch_id = '" . $id . "';");
+			$conn -> close();
+
+			if($row = $result -> fetch_assoc()){
+				return true;
+			}
+			else return false;
+		}
+
+		static function refExists($r){
+
+			$conn = DB();
+			$result = $conn -> query("SELECT * FROM watch WHERE watch_reference = '" . $r . "';");
+			$conn -> close();
+
+			if($row = $result -> fetch_assoc()){
+				return true;
+			}
+			else return false;
+		}
+
 		static function getBrandList(){
 			$conn = DB();
 			$result = $conn -> query("SELECT DISTINCT watch_brand FROM watch INNER JOIN listing on watch.watch_reference = listing.watch_reference;");
@@ -63,7 +87,7 @@
 		}
 
 		function setWatchCaseSize($c){
-			$this -> watch_case_size = $c;
+			$this -> watch_case_size = removeMM($c);
 		}
 
 		function getWatchCaseSize(){
@@ -76,12 +100,13 @@
 			$stmt = $conn->prepare("INSERT INTO watch (watch_reference, watch_brand,
 														watch_model, watch_material,
 														watch_id, user_email,
-														watch_created)
-									VALUES (?, ?, ?, ?, ?, ?, NOW())");		
+														watch_case_size, watch_created)
+									VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");		
 			
 			$stmt->bind_param("sssssss",	$this -> watch_reference, $this -> watch_brand,
 											$this -> watch_model, $this -> watch_material,
-											$this -> watch_id, $email);
+											$this -> watch_id, $email,
+											$this -> watch_case_size);
 			
 			$stmt -> execute();
 			$stmt -> close();
@@ -100,8 +125,20 @@
 				$this -> watch_brand = $row['watch_brand'];
 				$this -> watch_model = $row['watch_model'];
 				$this -> watch_material = $row['watch_material'];
+				$this -> watch_case_size = $row['watch_case_size'];
 			}
 		}
+	}
+
+	function removeMM($c){
+
+		//remove m
+		$c = str_replace('m', '', $c);
+
+		//remove M
+		$c = str_replace('M', '', $c);
+
+		return $c;
 	}
 
 ?>

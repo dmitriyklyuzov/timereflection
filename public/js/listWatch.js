@@ -11,6 +11,7 @@ function listWatch(){
 	var retail = $('#retail-input').val();
 	var price = $('#price-input').val();
 	var notes = $('#notes-input').val();
+	var serial = $('#serial-input').val();
 	var new_used = $('input[name=new_used]:checked').val();
 	var box = $('input[name=box]:checked').val();
 	var papers = $('input[name=papers]:checked').val();
@@ -62,6 +63,7 @@ function listWatch(){
 				"&material="+material+
 				"&retail="+retail+
 				"&dial="+dial+
+				"&serial="+serial+
 				"&new_used="+new_used+
 				"&condition="+condition+
 				"&sku="+sku+

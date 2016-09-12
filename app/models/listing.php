@@ -1,21 +1,5 @@
 <?php
 
-	function currencyToNumber($c){
-
-		// replace whitespaces
-		$c = str_replace(' ', '', $c);
-		// replace dollar sign
-		$c = str_replace('$', '', $c);
-		// replace commas
-		$c = str_replace(',', '', $c);
-
-		if(strpos($c, '.')){
-			$c = substr($c, 0, strpos($c, '.'));
-		}
-		return $c;
-
-	}
-
 	class Listing {
 
 		private $listing_id = '';
@@ -28,12 +12,13 @@
 		private $notes = '';
 		private $availability = '';
 		private $email = '';
+		private $date = '';
 		private $listing_img_1 = '';
 		private $box = '';
 		private $papers = '';
 		private $retail = '';
 		private $dial = '';
-
+		private $serial = '';
 
 		function generateListingId(){
 			$this -> listing_id = uniqid(uniqid());
@@ -141,6 +126,26 @@
 			return $this -> retail;
 		}
 
+		function setSerial($s){
+			$this -> serial = $s;
+		}
+
+		function getSerial(){
+			return $this -> serial;
+		}
+
+		function setEmail($e){
+			$this -> email = $e;
+		}
+
+		function getEmail(){
+			return $this -> email;
+		}
+
+		function getDate(){
+			return $this -> date;
+		}
+
 		static function getTotalCount(){
 			$conn = DB();
 			$result = $conn -> query('SELECT COUNT(*) FROM listing;');
@@ -177,15 +182,15 @@
 			$stmt = $conn->prepare("INSERT INTO listing (user_email, watch_reference, listing_condition,
 														listing_notes, listing_sku, listing_available,
 														listing_price, listing_new_used, listing_our_cost,
-														listing_dial, listing_retail,
-														listing_box, listing_papers, 
-														listing_id, listing_created)
-									VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");		
-			$stmt->bind_param("ssssssssssss", $email, $this -> reference, $this -> condition,
+														listing_dial, listing_retail, listing_box,
+														listing_papers, listing_serial,	listing_id,
+														listing_created)
+									VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");		
+			$stmt->bind_param("sssssssssssssss", $email, $this -> reference, $this -> condition,
 											$this -> notes, $this -> SKU, $this -> availability, 
 											$this -> price, $this -> new_used, $this -> cost,
-											$this -> dial, $this -> retail,
-											$this -> box, $this -> papers, $this -> listing_id);
+											$this -> dial, $this -> retail, $this -> box, 
+											$this -> papers, $this -> serial, $this -> listing_id);
 			
 			$stmt -> execute();
 			$stmt -> close();
@@ -256,6 +261,9 @@
 				$this -> dial = $row['listing_dial'];
 				$this -> box = $row['listing_box'];
 				$this -> papers = $row['listing_papers'];
+				$this -> retail = $row['listing_retail'];
+				$this -> date = $row['listing_created'];
+				$this -> serial = $row['listing_serial'];
 			}
 		}
 
@@ -319,6 +327,21 @@
 			$conn -> close();
 		}
 
+	}
+
+	function currencyToNumber($c){
+
+		// replace whitespaces
+		$c = str_replace(' ', '', $c);
+		// replace dollar sign
+		$c = str_replace('$', '', $c);
+		// replace commas
+		$c = str_replace(',', '', $c);
+
+		if(strpos($c, '.')){
+			$c = substr($c, 0, strpos($c, '.'));
+		}
+		return $c;
 	}
 
 ?>

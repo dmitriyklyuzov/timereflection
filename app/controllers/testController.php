@@ -7,10 +7,6 @@
 	include_once('../models/watch.php');
 	include_once('../models/listing.php');
 
-	$user = new User();
-
-	$watch = new Watch();
-
 	// REDIRECT TO LOGIN IF NOT LOGGED IN
 	if(!User::isLoggedIn()){
 		$errorMsg = 'Please log in first.';
@@ -18,25 +14,42 @@
 		exit();
 	}
 
-	if(isset($_GET['action']) && isset($_GET['id'])){
-		// echo 'ID: ' . $_GET['id'];
-		$id = sanitize($_GET['id']);
-		// echoBr();
+	if(isset($_POST['action']) && isset($_POST['id']) && isset($_POST['field']) && isset($_POST['value'])){
+
+		$action = sanitize($_POST['action']);
+		$id = sanitize($_POST['id']);
+		$field = sanitize($_POST['field']);
+		$value = sanitize($_POST['value']);
 
 		if(Listing::exists($id)){
-			// echo "listing exists.<br>";
-			Listing::deleteImages($id);
-			Listing::delete($id);
-			// echo 'Delete performed.<br>';
-			if(Listing::exists($id)){
-				echo 'Listing still exists :(<br>';
+
+			if($field == 'listing_retail' || $field == 'listing_price' || $field == 'listing_our_cost'){
+				$value = currencyToNumber($value);
 			}
-			else{
-				// echo 'Listing deleted!<br>';
-				header('Location: http://localhost:8888/timereflection/');
-			}
+
+			$conn = DB();
+			$conn -> query('UPDATE listing SET ' . $field . ' = "' . $value . '" WHERE listing_id = "' . $id . '";');
+			$conn -> close();
+
+			echo 'true';
 		}
-		else echo "listing you're trying to delete does not exist.<br>";
+
+		else if(Watch::refExists($id)){
+
+			if($field == 'watch_case_size'){
+				$value = str_replace(' ', '', $value);
+				$value = str_replace('m', '', $value);
+				$value = str_replace('M', '', $value);
+			}
+
+			$conn = DB();
+			$conn -> query('UPDATE watch SET ' . $field . ' = "' . $value . '" WHERE watch_reference = "' . $id . '";');
+			$conn -> close();
+
+			echo 'true';
+		}
+
+		else echo 'false';
 	}
 	
 ?>

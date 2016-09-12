@@ -9,6 +9,16 @@
 		private $loginAttempts ='';
 		private $lastIp = '';
 
+		static function getFirstName($e){
+			$conn = DB();
+			$result = $conn -> query("SELECT user_f_name FROM user WHERE user_email='" . $e . "';");
+			$conn->close();
+
+			$row = $result -> fetch_assoc();
+			$firstName = $row['user_f_name'];
+			return $firstName;
+		}
+
 		function setName($n){
 			$_SESSION['name']=$n;
 		}

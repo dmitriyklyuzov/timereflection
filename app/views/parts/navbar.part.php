@@ -40,7 +40,7 @@
 							<!-- <li><a href="#">ABOUT</a></li> -->
 							<!-- <li><a href="#">CONTACT</a></li> -->
 							<?php if(User::isLoggedIn()): ?>
-								<li><a href="add">ADD</a></li>
+								<li><a href="http://localhost:8888/timereflection/add">ADD</a></li>
 								<li class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" href="#">HI, <?php echo strtoupper(User::getName()); ?>
 									<span class="caret"></span></a>
