@@ -3,9 +3,26 @@
 	<head>
 		<?php getHead(toCamelCase($brand . ' ' . $model)); ?>
 		<script type="text/javascript" src="public/js/centerChildDiv.js"></script>
-		<!-- <script type="text/javascript" src="public/js/contentEdit.js"></script> -->
+		
+		<?php if(User::isLoggedIn()): ?>
 		<script type="text/javascript">
 			function saveToDB(id, field, value){
+
+				// alert('id='+id+', field='+field+', value='+value);
+
+				// replaces linebreak when modifying notes
+				if(value=='<br>'){
+					value='';
+				}
+
+				// replaces new/pre-owned with 1 and 2
+				if(value=='New' || value=='new' || value=='unworn'){
+					value = '1';
+				}
+				if(value=='Used' || value =='Pre-owned'){
+					value = '2';
+				}
+
 				$.ajax({
 					url: "http://localhost:8888/timereflection/app/controllers/testController.php",
 					type: "POST",
@@ -42,6 +59,24 @@
 				});
 			}
 		</script>
+		<script>
+			function replaceRadio(id){
+
+				if(id=='listing_box' || id=='listing_papers'){
+					var radio = 
+					'<label class="radio-inline"><input type="radio" name="'+id+'" value="1"><span class="text-success">Yes</span></label><label class="radio-inline"><input type="radio" name="'+id+'" value="2"><span class="text-warning">No</span></label>';
+				}
+
+				if($("#"+id).html() !== radio){
+					$("#"+id).html(radio);
+				}
+				else{
+					// alert($('input[name="'+id+'"]:checked').val());
+					saveToDB('<?php echo $listing -> getListingId(); ?>', id, $('input[name="'+id+'"]:checked').val());
+				};
+			}
+		</script>
+		<?php endif; ?>
 	</head>
 
 	<body style="">
@@ -97,7 +132,7 @@
 				</p>
 				<h4 class="text-center">
 					<span class="text-muted">Price: </span>
-					<span class="text-danger" id="listing_price" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);">$<?php echo $price;?></span>
+					<span class="text-danger" <?php if(User::isLoggedIn()): ?> id="listing_price" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);" <?php endif; ?>>$<?php echo $price;?></span>
 				</h4>
 				<p class="text-center <?php echo $text;?>"><?php echo $available;?></p>
 				<div class="text-center">
@@ -128,11 +163,11 @@
 					<tbody>
 						<tr>
 							<td><b>BRAND</b></td>
-							<td id="watch_brand" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $brand; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="watch_brand" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $brand; ?></td>
 						</tr>
 						<tr>
 							<td><b>MODEL</b></td>
-							<td id="watch_model" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $model; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="watch_model" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $model; ?></td>
 						</tr>
 						<tr>
 							<td><b>REFERENCE</b></td>
@@ -140,27 +175,30 @@
 						</tr>
 						<tr>
 							<td><b>SKU</b></td>
-							<td id="listing_sku" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $sku; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="listing_sku" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $sku; ?></td>
 						</tr>
 						<tr>
 							<td><b>RETAIL</b></td>
-							<td id="listing_retail" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);">$<?php echo $retail; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="listing_retail" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);" <?php endif; ?>>$<?php echo $retail; ?></td>
 						</tr>
 						<tr>
 							<td><b>MATERIAL</b></td>
-							<td id="watch_material" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $material; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="watch_material" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $material; ?></td>
 						</tr>
 						<tr class="visible-xs">
-							<td id="dial"><b>DIAL</b></td>
-							<td id="listing_dial" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $dial; ?></td>
+							<td><b>DIAL</b></td>
+							<td <?php if(User::isLoggedIn()): ?> id="listing_dial_xs" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $dial; ?></td>
 						</tr>
 						<tr class="visible-xs">
 							<td><b>CONDITION</b></td>
-							<td><?php echo $condition.'/10 ('.$new_used.')'; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="listing_condition_xs" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);" <?php endif; ?>>
+								<span><?php echo $condition;?></span>
+								<?php echo '/10 ('.$new_used.')'; ?>
+							</td>
 						</tr>
 						<tr class="visible-xs">
 							<td><b>CASE SIZE</b></td>
-							<td id="watch_case_size" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $caseSize.'mm'; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="watch_case_size_xs" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $caseSize.'mm'; ?></td>
 						</tr>
 						<tr class="visible-xs">
 							<td><b>BOX</b></td>
@@ -172,7 +210,7 @@
 						</tr>
 						<tr class="visible-xs">
 							<td><b>NOTES</b></td>
-							<td id="listing_notes" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $notes; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="listing_notes_xs" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $notes; ?></td>
 						</tr>
 					</tbody>
 				</table>
@@ -184,28 +222,31 @@
 					<tbody>
 						<tr>
 							<td><b>DIAL</b></td>
-							<td id="listing_dial" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $dial; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="listing_dial" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $dial; ?></td>
 						</tr>
 						<tr>
 							<td><b>CONDITION</b></td>
-							<td><?php echo $condition.'/10 ('.$new_used.')'; ?></td>
+							<td id="listing_condition">
+								<span <?php if(User::isLoggedIn()): ?> class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', 'listing_condition', this.innerHTML);" <?php endif; ?>><?php echo $condition;?></span>/10
+								(<span <?php if(User::isLoggedIn()): ?> class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', 'listing_new_used', this.innerHTML);" <?php endif; ?>><?php echo $new_used; ?></span>)
+							</td>
 						</tr>
 						<tr>
 							<td><b>CASE SIZE</b></td>
-							<td id="watch_case_size" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);"><?php echo $caseSize.'mm'; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="watch_case_size" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingReference(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $caseSize.'mm'; ?></td>
 						</tr>
 
 						<tr>
 							<td><b>BOX</b></td>
-							<td ><?php echo $box; ?></td>
+							<td id="listing_box" class="transition-ease" onclick="replaceRadio(this.id);"><?php echo $box; ?></td>
 						</tr>
 						<tr>
 							<td><b>PAPERS</b></td>
-							<td><?php echo $papers; ?></td>
+							<td id="listing_papers" class="transition-ease" onclick="replaceRadio(this.id);"><?php echo $papers; ?></td>
 						</tr>
 						<tr>
 							<td><b>NOTES</b></td>
-							<td id="listing_notes" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);"><?php echo $notes; ?></td>
+							<td <?php if(User::isLoggedIn()): ?> id="listing_notes" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);" <?php endif; ?>><?php echo $notes; ?></td>
 						</tr>
 					</tbody>
 				</table>
@@ -217,7 +258,7 @@
 		<!-- Admin-only info -->
 		<div class="container background-white margin-top-2em margin-bottom-2em padding-top-1em padding-bottom-1em">
 			<div class="col-sm-6 col-xs-12 background-white">
-				<h3 class="">DETAILS</h3>
+				<h3 class="">ADDITIONAL DETAILS</h3>
 				<br>
 				<table class="table">
 					<tbody>
@@ -248,6 +289,7 @@
 				<a href="http://localhost:8888/timereflection/delete/<?php echo $listing->getListingId(); ?>">Delete</a>
 			</div>
 		</div>
+
 		<?php endif; ?>
 		
 	</body>

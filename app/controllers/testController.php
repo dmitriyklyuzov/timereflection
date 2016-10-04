@@ -36,6 +36,10 @@
 
 		else if(Watch::refExists($id)){
 
+			if($field == 'watch_case_size_xs'){
+				$field == 'watch_case_size';
+			}
+
 			if($field == 'watch_case_size'){
 				$value = str_replace(' ', '', $value);
 				$value = str_replace('m', '', $value);
