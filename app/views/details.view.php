@@ -24,7 +24,7 @@
 				}
 
 				$.ajax({
-					url: "http://localhost:8888/timereflection/app/controllers/testController.php",
+					url: "http://localhost:8888/timereflection/app/controllers/listingController.php",
 					type: "POST",
 					data: 'action=update&id='+id+'&field='+field+'&value='+value,
 					success: function(result){
@@ -72,7 +72,13 @@
 				}
 				else{
 					// alert($('input[name="'+id+'"]:checked').val());
-					saveToDB('<?php echo $listing -> getListingId(); ?>', id, $('input[name="'+id+'"]:checked').val());
+					var value = $('input[name="'+id+'"]:checked').val();
+					saveToDB('<?php echo $listing -> getListingId(); ?>', id, value);
+					var text = 'YES';
+					if(value=='2'){
+						text = 'NO';
+					}
+					$("#"+id).html(text);
 				};
 			}
 		</script>
