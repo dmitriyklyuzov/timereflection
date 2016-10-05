@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<?php getHead(toCamelCase($brand . ' ' . $model)); ?>
+		<?php getHead('TEST'); ?>
+		<link rel="stylesheet" href="http://localhost:8888/timereflection/public/css/smoothproducts.css">
 		<script type="text/javascript" src="public/js/centerChildDiv.js"></script>
 		
 		<?php if(User::isLoggedIn()): ?>
@@ -96,30 +97,14 @@
 		<div class="container details-container background-white clearfix">
 
 			<!-- IMAGE -->
-			<div class="col-sm-5 col-xs-12 clearfix" id="imageDiv">
+			<div class="col-sm-5 col-xs-12 padding-top-2em clearfix" id="imageDiv">
 				<?php 
 					if($listing -> hasImages($listing->getListingId())){ ?>
-						<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
-							<!-- Wrapper for slides -->
-							<div class="carousel-inner" role="listbox" id="detailsImageCarousel">
-										<?php $listing -> getImages(); ?>
-								<!-- <div id="carouselItem" class="item active" style=" padding-top: 2em; padding-bottom: 2em">
-									<img id="item-image" class="img-responsive text-center" src="public/img/watches/patek-philippe-grand-complications.jpg" style="margin-left: auto; margin-right: auto;">
-								</div>
-								<div id="carouselItem" class="item" style=" padding-top: 2em; padding-bottom: 2em">
-									<img id="item-image" class="img-responsive text-center" src="public/img/watches/patek-philippe-grand-complications.jpg" style="margin-left: auto; margin-right: auto;">
-								</div> -->
-							</div>
-
-							<!-- Left and right controls -->
-							<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" style="background-image: none;">
-								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-								<span class="sr-only">Previous</span>
-							</a>
-							<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="background-image: none;">
-								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-								<span class="sr-only">Next</span>
-							</a>
+						<div class="sp-loading"><img src="http://localhost:8888/timereflection/public/img/sp-loading.gif" alt=""><br>LOADING IMAGES</div>
+						<div class="sp-wrap">
+							<?php Listing::getImages2($listing->getListingId()); ?>
+							<!-- <a href="http://localhost:8888/timereflection/public/img/watches/rolex-daytona-2.jpg"><img src="http://localhost:8888/timereflection/public/img/watches/rolex-daytona-2.jpg" alt=""></a>
+							<a href="http://localhost:8888/timereflection/public/img/watches/Rolex-Submariner-Date-16610.jpg"><img src="http://localhost:8888/timereflection/public/img/watches/Rolex-Submariner-Date-16610.jpg" alt=""></a> -->
 						</div>
 					<?php 
 					}
@@ -297,5 +282,12 @@
 		</div>
 
 		<?php endif; ?>
+		<script type="text/javascript" src="http://localhost:8888/timereflection/public/js/smoothproducts.min.js"></script>
+		<script type="text/javascript">
+		/* wait for images to load */
+		$(window).load( function() {
+			$('.sp-wrap').smoothproducts();
+		});
+	</script>
 	</body>
 </html>

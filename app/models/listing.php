@@ -218,6 +218,18 @@
 
 		}
 
+		static function getImages2($id){
+			$conn = DB();
+			$result = $conn -> query("SELECT img_name FROM listing_img WHERE listing_id = '" . $id . "' ORDER BY main_img DESC;");
+			$conn -> close();
+
+			while($row = $result -> fetch_assoc()){
+				$img = $row['img_name'];
+
+				echo '<a href="http://localhost:8888/timereflection/public/img/watches/'.$img.'"><img src="http://localhost:8888/timereflection/public/img/watches/'.$img.'"></a>';
+			}
+		}
+
 		static function hasImages($id){
 			$conn = DB();
 			$result = $conn -> query("SELECT img_name FROM listing_img WHERE listing_id = '" . $id . "';");

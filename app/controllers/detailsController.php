@@ -67,7 +67,7 @@
 			$material = $watch -> getWatchMaterial();
 			$caseSize = $watch -> getWatchCaseSize();
 
-			include('../views/details.view.php');
+			include('../views/details2.view.php');
 		}
 
 		else{
