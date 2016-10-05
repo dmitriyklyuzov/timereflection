@@ -42,6 +42,7 @@ html, body {
 
 .sp-thumbs {
 	/*text-align: left;*/
+	padding-top: 2em;
 	display: inline-block;
 	margin-left: auto;
 	margin-right: auto;

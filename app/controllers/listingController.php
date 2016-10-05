@@ -53,7 +53,7 @@
 			echo 'true';
 		}
 		else echo 'false';
-		
+
 		exit();
 	}
 

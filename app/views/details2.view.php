@@ -123,9 +123,9 @@
 				</p>
 				<h4 class="text-center">
 					<span class="text-muted">Price: </span>
-					<span class="text-danger" <?php if(User::isLoggedIn()): ?> id="listing_price" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);" <?php endif; ?>>$<?php echo $price;?></span>
+					<span class="" <?php if(User::isLoggedIn()): ?> id="listing_price" class="transition-ease" contenteditable="true" onBlur="saveToDB('<?php echo $listing -> getListingId(); ?>', this.id, this.innerHTML);" <?php endif; ?>>$<?php echo $price;?></span>
 				</h4>
-				<p class="text-center <?php echo $text;?>"><?php echo $available;?></p>
+				<h4 class="text-center <?php echo $text;?>"><?php echo $available;?></h4>
 				<div class="text-center">
 					<button class="btn btn-dark-blue no-rounded-corners transition-ease">
 						<a href="mailto:irina@timereflectioninc.com?
