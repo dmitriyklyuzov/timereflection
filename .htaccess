@@ -1,0 +1,68 @@
+#<IfModule mod_rewrite.c>
+
+# Turn the Rewrite Engine On
+RewriteEngine on
+
+# index
+RewriteRule ^/ app/controllers/indexController.php [NC,L]
+RewriteRule ^index app/controllers/indexController.php [NC,L]
+
+# about us
+RewriteRule ^about app/controllers/aboutController.php [NC,L]
+
+# contact us
+RewriteRule ^contact app/controllers/aboutController.php [NC,L]
+
+# Get More Thumbnails
+RewriteRule ^/getMoreThumbs/([0-9a-zA-Z]) app/controllers/indexController.php?start=$1 [NC,L]
+
+# test
+RewriteRule ^test app/controllers/testController.php [NC,L]
+# RewriteRule ^test2 app/controllers/testController2.php [NC,L]
+
+# login / logout
+RewriteRule ^login app/controllers/loginController.php [NC,L]
+RewriteRule ^logout app/controllers/loginController.php?action=logout [NC,L]
+
+# register
+RewriteRule ^register app/controllers/registrationController.php [NC,L]
+
+# add
+RewriteRule ^add/list/([0-9a-zA-Z]+) app/controllers/listingController.php?action=list&reference=$1 [NC,L]
+RewriteRule ^add/lookup/([0-9a-zA-Z]+) app/controllers/listingController.php?action=lookup&reference=$1 [NC,L]
+RewriteRule ^add/list/([0-9a-zA-Z]+) app/controllers/listingController.php?listreference=$1 [NC,L]
+RewriteRule ^add app/controllers/listingController.php [NC,L]
+
+# details
+RewriteRule ^details/([0-9a-zA-Z]+) app/controllers/detailsController.php?listingId=$1 [NC,L]
+
+#admin
+RewriteRule ^admin app/controllers/adminController.php [NC,L]
+
+#delete
+# RewriteRule ^deleteImg app/controllers/deleteAllImages.php [NC,L]
+
+#results
+RewriteRule ^search?(.*)$ app/controllers/resultsController.php?s=$1 [NC,L,QSA]
+
+#model
+RewriteRule ^brands/([0-9a-zA-Z_%]+)/model/([0-9a-zA-Z_%]+) app/controllers/resultsController.php?s=$1&m=$2 [NC,L]
+
+#brands
+RewriteRule ^brands/([0-9a-zA-Z_%]+) app/controllers/resultsController.php?s=$1 [NC,L]
+
+#delete
+RewriteRule ^delete/([0-9a-zA-Z]+) app/controllers/listingController.php?action=delete&reference=$1 [NC,L]
+
+#update
+# RewriteRule ^update/([0-9a-zA-Z]+)/([0-9a-zA-Z_]+)/([0-9a-zA-Z]+) app/controllers/testController.php?action=update&id=$1&field=$2&value=$3 [NC,L]
+
+#update
+RewriteRule ^update app/controllers/testController.php [NC,L]
+
+#getWatchId
+RewriteRule ^id app/controllers/getNewId.php [NC,L]
+
+# RewriteRule    ^$    public/    [L]
+# RewriteRule    (.*) public/$1    [L]
+#</IfModule>

@@ -1,0 +1,350 @@
+<!-- redirect to dkbk.us -->
+
+<!--<!DOCTYPE html>-->
+<!--<head>-->
+<!--	<meta charset="UTF-8" http-equiv="refresh" content="0; URL='http://dkbk.us'" />-->
+<!--	<title>Redirect</title>-->
+<!--</head>-->
+<!--</html>-->
+
+
+<html>
+	<head>
+		<title>Tips</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0, user-scalable=yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="apple-touch-icon" href="apple-touch-icon-180.png">
+		<link rel="icon" sizes="192x192" href="android-192.png">
+	</head>
+	<style>
+
+	body {
+	    font-size:1.5em;
+	}
+	
+	#tipouts, label{
+	    font-size:1.15em;
+	  }
+
+	#go_button{
+	   font-size:1em;
+	   width:80%;
+	 }
+	 
+	 input{
+	    font-size:1em;
+	 }
+	 
+	 #includeBarista, #includeShucker{
+	   width: 25px; height: 25px;
+	 }
+
+	 #day{
+	 	text-align: center;
+	 }
+	 
+	 #address{
+	 	text-align: center;
+	 	color: gray;
+	 }
+	  
+	</style>
+	<body>
+		<p id="day"></p>
+
+		<form id="my_form">
+
+			<label for="sales">Net sales</label></br>
+			<input id="sales" placeholder="optional" type="number"></br>
+
+			<label for="cash_sales">Cash owed</label></br>
+			<input id="cash_sales" placeholder="optional" type="number"></br>
+
+			<label for="cc_tips">CC Tips</label></br>
+			<input id="cc_tips" type="number"></br>
+
+			<label for="cash_tips">Cash Tips</label></br>
+			<input id="cash_tips" type="number"></br></br>
+
+			<label for="includeBarista">Barista Tipout</label>
+    	<input id="includeBarista" type="checkbox" checked=""/><br><br>
+    	
+    	<label for="includeShucker">Shucker Tipout</label>
+    	<input id="includeShucker" type="checkbox" checked=""/><br><br>
+      <center>
+			<button type="button" id="go_button" onclick="displayAll()">OK</button>
+			</center>
+
+		</br>
+		</br>
+
+			<table id="tipouts">
+
+				<!-- <tr id="testSales">
+					<td>Sales: </td>
+					<td id="testSalesData"><td>
+				</tr> -->
+
+				
+				<tr id="tipPercentage">
+					<td>Tip %: </td>
+					<td id="tipPercentageData"><td>
+				</tr>
+
+				<tr id="cashTipPercentage">
+					<td>Cash tip %: </td>
+					<td id="cashTipPercentageData"><td>
+				</tr>
+
+				<tr><td></br></td></tr>
+
+				
+				<tr id="grossTips">
+					<td><b>Gross Tips:</b></td>
+					<td id="grossTipsData"></td>
+				</tr>
+
+				<tr id="barTipout">
+					<td>Bartender 4%:</td>
+					<td id="barTipData"></td>
+				</tr>
+				
+				<tr id="barbackTipout">
+					<td>Barback 1%:</td>
+					<td id="barbackTipData"></td>
+				</tr>
+
+				<tr id="busserTipout">
+					<td>Busser 13%:</td>
+					<td id="busserTipData"></td>
+				</tr>
+
+				<tr id="runnerTipout">
+					<td>Runner 12%:</td>
+					<td id="runnerTipData"></td>
+				</tr>
+
+				<tr id="shuckerTipout">
+					<td>Shucker 1%:</td>
+					<td id="shuckerTipData"></td>
+				</tr>
+
+				<tr id="baristaTipout">
+					<td>Barista 2%:</td>
+					<td id="baristaTipData"></td>
+				</tr>
+
+				<tr id="netTips">
+					<td><b>Net Tips: </b></td>
+					<td id="netTipData"></td>
+				</tr>
+
+			</table>
+
+		</form>
+		
+		<p id="address">pjtips.neocities.org</p>
+
+			<script>
+
+			var gross_tips=0.00;
+			var sales=0.00;
+			var cash_sales=0;
+			var percentage=0;
+			var cashPercentage=0;
+
+			var barTip=0;
+			var barbackTip=0;
+			var busserTip=0;
+			var runnerTip=0;
+			var shuckerTip=0;
+			var baristaTip=0;
+			var netTips=0;
+
+
+			function displayAll(){
+				getGrossTips();
+				getPercentage();
+				getCashPercentage();
+				getBar();
+				getBarback();
+				getBusser();
+				getRunner();
+				getShucker2();
+				getBarista();
+				getNetTips();
+				// testSales();
+			}
+
+			function getGrossTips(){
+
+				var theForm = document.forms["my_form"];
+				
+				var cc_tips_text = theForm.elements["cc_tips"];
+				if(cc_tips_text.value!=""){
+					cc_tips=parseFloat(cc_tips_text.value);
+				}
+				
+				var cash_tips_text = theForm.elements["cash_tips"];
+				if(cash_tips_text.value!=""){
+					cash_tips=parseFloat(cash_tips_text.value);
+				}
+
+				gross_tips = parseFloat(cc_tips + cash_tips).toFixed(2);
+
+				document.getElementById('grossTipsData').innerHTML = "<b>$" + gross_tips + "</b>";
+
+			}
+
+			// changed
+			function getPercentage(){
+
+				var theForm = document.forms["my_form"];
+				var sales_text = theForm.elements["sales"];
+
+				if(sales_text.value!=""){
+					sales_float=parseFloat(sales_text.value);
+				  if(sales_float!=0){
+				    percentage = parseFloat(gross_tips/sales_float * 100).toFixed(2);
+				    document.getElementById('tipPercentageData').innerHTML = percentage + "%";
+				  }
+				  else document.getElementById('tipPercentageData').innerHTML = "";
+				}
+				else document.getElementById('tipPercentageData').innerHTML = "";
+			}
+
+			// new
+			function getCashPercentage(){
+
+				var theForm = document.forms["my_form"];
+				var cash_sales_text = theForm.elements["cash_sales"];
+
+				if(cash_sales_text.value!=""){
+					cash_sales_float=parseFloat(cash_sales_text.value).toFixed(2);
+					if(cash_sales_float!=0){
+					  cash_percentage = parseFloat(cash_tips/cash_sales_float * 100).toFixed(2);
+					  document.getElementById('cashTipPercentageData').innerHTML = cash_percentage + "%";
+					}
+					else document.getElementById('cashTipPercentageData').innerHTML = "";
+				}
+				else document.getElementById('cashTipPercentageData').innerHTML = "";
+			}
+
+			// new
+			function testSales(){
+
+				var theForm = document.forms["my_form"];
+				var sales_text = theForm.elements["sales"];
+
+				if(sales_text.value!=""){
+					sales_float=parseFloat(sales_text.value).toFixed(2);
+					// percentage = parseFloat(gross_tips/sales_int * 100).toFixed(2);
+				}
+
+				document.getElementById('testSalesData').innerHTML = sales_int;
+			}
+
+			
+			function getBar(){
+				barTip = parseFloat(gross_tips*0.04).toFixed(2);
+
+				document.getElementById('barTipData').innerHTML = "$" + barTip;
+			}
+			
+			function getBarback(){
+				barbackTip = parseFloat(gross_tips*0.01).toFixed(2);
+
+				document.getElementById('barbackTipData').innerHTML = "$" + barbackTip;
+			}
+
+			function getBusser(){
+				busserTip = parseFloat(gross_tips*0.13).toFixed(2);
+
+				document.getElementById('busserTipData').innerHTML = "$" + busserTip;
+			}
+
+			function getRunner(){
+				runnerTip = parseFloat(gross_tips*0.12).toFixed(2);
+
+				document.getElementById('runnerTipData').innerHTML = "$" + runnerTip;
+			}
+
+			function getShucker(){
+				shuckerTip = parseFloat(gross_tips*0.01).toFixed(2);
+
+				document.getElementById('shuckerTipData').innerHTML = "$" + shuckerTip;
+			}
+			
+			function getShucker2(){
+			  if(includeShucker.checked==true){
+				  shuckerTip = parseFloat(gross_tips*0.01).toFixed(2);
+			  }
+			  else shuckerTip = parseFloat(0).toFixed(2);
+
+				document.getElementById('shuckerTipData').innerHTML = "$" + shuckerTip;
+			}
+
+			function getBarista(){
+				if(includeBarista.checked==true){
+					baristaTip = parseFloat(gross_tips*0.02).toFixed(2);
+				}
+				else baristaTip = parseFloat(0).toFixed(2);
+
+				document.getElementById('baristaTipData').innerHTML = "$" + baristaTip;
+			}
+
+			function getNetTips(){
+				netTips = parseFloat(gross_tips - 
+										barTip -
+										barbackTip -
+										busserTip -
+										runnerTip -
+										shuckerTip -
+										baristaTip).toFixed(2);
+
+				document.getElementById('netTipData').innerHTML =  "<b>$" + netTips + "</b>";
+			}
+
+			function getTodaysDate(){
+				var d = new Date();
+				var dayOfTheWeek = "";
+				var month = d.getMonth() + 1;
+				var day = d.getDate();
+				var year = d.getFullYear();
+				
+				switch (d.getDay()){				
+					case 0:
+			        dayOfTheWeek = "Sunday";
+			        break;
+			    	case 1:
+			        dayOfTheWeek = "Monday";
+			        break;
+			    	case 2:
+			        dayOfTheWeek = "Tuesday";
+			        break;
+			    	case 3:
+			        dayOfTheWeek = "Wednesday";
+			        break;
+			    	case 4:
+			        dayOfTheWeek = "Thursday";
+			        break;
+			    	case 5:
+			        dayOfTheWeek = "Friday";
+			        break;
+			    	case 6:
+			        dayOfTheWeek = "Saturday";
+			        break;
+				}
+
+				var dateText = "<b>" + dayOfTheWeek + ", " + month + "/" + day + "/" + year + "</b>";
+
+				document.getElementById('day').innerHTML = dateText;
+			}
+
+			getTodaysDate();
+
+			</script>
+			<script src="GoogleAnalytics.js"></script>
+	</body>
+</html>

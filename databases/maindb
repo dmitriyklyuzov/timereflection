@@ -1,0 +1,160 @@
+-- phpMyAdmin SQL Dump
+-- version 4.4.10
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:8889
+-- Generation Time: Sep 27, 2016 at 12:31 PM
+-- Server version: 5.5.42
+-- PHP Version: 7.0.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `main`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `listing`
+--
+
+CREATE TABLE `listing` (
+  `listing_id` varchar(50) NOT NULL,
+  `user_email` varchar(50) NOT NULL,
+  `watch_reference` varchar(50) NOT NULL,
+  `listing_condition` int(5) NOT NULL,
+  `listing_notes` varchar(255) NOT NULL DEFAULT '',
+  `listing_SKU` varchar(20) NOT NULL DEFAULT '',
+  `listing_available` tinyint(1) NOT NULL DEFAULT '1',
+  `listing_price` varchar(10) NOT NULL DEFAULT '',
+  `listing_new_used` int(1) NOT NULL,
+  `listing_our_cost` varchar(10) NOT NULL,
+  `listing_created` varchar(50) NOT NULL,
+  `listing_box` int(1) NOT NULL,
+  `listing_papers` int(1) NOT NULL,
+  `listing_dial` varchar(50) NOT NULL DEFAULT '',
+  `listing_retail` varchar(50) NOT NULL DEFAULT '',
+  `listing_serial` varchar(50) NOT NULL DEFAULT '',
+  `listing_active` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `listing`
+--
+
+INSERT INTO `listing` (`listing_id`, `user_email`, `watch_reference`, `listing_condition`, `listing_notes`, `listing_SKU`, `listing_available`, `listing_price`, `listing_new_used`, `listing_our_cost`, `listing_created`, `listing_box`, `listing_papers`, `listing_dial`, `listing_retail`, `listing_serial`, `listing_active`) VALUES
+('57c13638d640d57c13638d6415', 'dima@dima.com', '16233', 10, '', 'IR1234', 2, '3500', 2, '3302', '2016-08-27 02:42:00', 2, 2, 'GOLD', '500000', 'A Serial', 0),
+('57c136ee5f52357c136ee5f53a', 'dima@dima.com', '5037', 5, 'Hey!', 'IR031', 3, '41100', 0, '39622', '2016-08-27 02:45:02', 1, 1, 'GOLD', '10000', 'Y Serial', 0),
+('57d818e4095c657d818e4095d1', 'asdf', '16610', 8, '', 'IR012', 1, '4600', 0, '4339', '2016-09-13 11:19:00', 2, 2, 'BLACK', '4800', 'T Serial', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `listing_img`
+--
+
+CREATE TABLE `listing_img` (
+  `listing_id` varchar(50) NOT NULL,
+  `img_name` varchar(255) NOT NULL,
+  `main_img` int(1) NOT NULL,
+  `date_added` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `listing_img`
+--
+
+INSERT INTO `listing_img` (`listing_id`, `img_name`, `main_img`, `date_added`) VALUES
+('57c13638d640d57c13638d6415', 'rolex-daytona-2.jpg', 1, '2016-08-27 02:42:21'),
+('57c136ee5f52357c136ee5f53a', 'patek-philippe-grand-complications.jpg', 1, '2016-08-27 02:45:12'),
+('57c1c5b79161957c1c5b791627', 'm116680-0001.jpg', 1, '2016-08-27 12:54:36'),
+('57c1c5b79161957c1c5b791627', 'rolex-cosmograph-daytona-white-dial-stainless-steel-rolex-oyster-automatic-men_s-watch-116520wso.jpg', 0, '2016-08-27 12:54:36'),
+('57d818e4095c657d818e4095d1', 'Rolex-Submariner-Date-16610.jpg', 1, '2016-09-13 11:19:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `user_email` varchar(50) NOT NULL,
+  `user_password` varchar(50) NOT NULL,
+  `user_last_login` varchar(50) DEFAULT NULL,
+  `user_login_attempts` int(5) DEFAULT '0',
+  `user_last_ip` varchar(50) DEFAULT NULL,
+  `user_f_name` varchar(50) NOT NULL,
+  `user_regdate` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_email`, `user_password`, `user_last_login`, `user_login_attempts`, `user_last_ip`, `user_f_name`, `user_regdate`) VALUES
+('admin', '135d3532cb3d324552e975c2c53fba60', '2016-08-02 15:58:21', 0, NULL, 'Dmitriy', '2016-08-02 15:58:14'),
+('asdf', '08c6957ff828df7b88590f523c8588bc', '2016-09-12 14:05:04', 0, NULL, 'asdf', '2016-07-25 14:27:36'),
+('dima@dima.com', 'd246b85cb8b84483b2a22258329d6708', '2016-08-27 01:43:51', 0, NULL, 'dima', '2016-08-27 01:43:24'),
+('ira@gmail.com', '369a84ca314e815d1c21ef67806ac7f0', '2016-08-27 12:49:19', 0, NULL, 'Ira', '2016-08-27 12:49:09'),
+('nazar@gmail.com', '954df627e3f589342d5ec822e4920216', '2016-08-08 23:24:32', 0, NULL, 'Nazar', '2016-08-08 23:24:19'),
+('q', 'fcce6516a4c542529d82a7a08eff4565', '2016-08-02 16:59:43', 0, NULL, 'Q', '2016-08-02 16:59:33'),
+('y', '6c0eb6b340b54103a678ffedb65b4dbb', '2016-08-02 15:32:25', 0, NULL, 'yulia', '2016-08-02 15:32:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `watch`
+--
+
+CREATE TABLE `watch` (
+  `watch_id` varchar(50) NOT NULL,
+  `watch_brand` varchar(50) NOT NULL,
+  `watch_model` varchar(50) NOT NULL,
+  `watch_material` varchar(50) NOT NULL DEFAULT '',
+  `watch_reference` varchar(50) NOT NULL,
+  `user_email` varchar(50) NOT NULL,
+  `watch_created` varchar(50) NOT NULL,
+  `watch_case_size` varchar(50) NOT NULL DEFAULT '',
+  `watch_full_text` varchar(200) NOT NULL DEFAULT '=watch_brand'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `watch`
+--
+
+INSERT INTO `watch` (`watch_id`, `watch_brand`, `watch_model`, `watch_material`, `watch_reference`, `user_email`, `watch_created`, `watch_case_size`, `watch_full_text`) VALUES
+('', '', '', '', '', '', '', '', ''),
+('57a7c65073bab57a7c65073bc3', 'ROLEX', 'SUBMARINER', 'STEEL', '1234', 'asdf', '2016-08-07 19:33:55', '23', ''),
+('57ad30565249957ad3056524b0', 'Yulia Rolex', 'Model S', 'GOLD', '12345', 'asdf', '2016-08-11 22:11:34', '44', ''),
+('57b25af657f9f57b25af657faa', 'ROLEX', 'SUB DATE', 'Metal', '16611', 'asdf', '2016-08-15 20:14:46', '44', ''),
+('57b260a793df657b260a793e01', 'ROLEX', '2T DATEJUST', 'ROSE GOLD', '16233', 'asdf', '2016-08-15 20:39:03', '35', ''),
+('57b262284c4ad57b262284c4b7', 'Rolex', 'DAY DATE SQ', 'GOLD', '18038', 'asdf', '2016-08-15 20:45:28', '', ''),
+('57bc951618ad857bc951618ae3', 'Patek Philippe', 'Annual Calendar', '18k White Gold', '5037', 'asdf', '2016-08-23 14:25:26', '45', ''),
+('57c11b3cb732057c11b3cb7334', 'Rolex', '2T DAYTONA', 'GOLD', '16523', 'asdf', '2016-08-27 00:46:52', '', ''),
+('57d46111b4b7057d46111b4b7d', 'BRAND', 'MODEL', 'MATERIAL', '12341234', 'asdf', '2016-09-10 15:37:53', '', ''),
+('57d6cca303a7f57d6cca303a89', 'ROLEX', 'SUB DATE', '', '16611', '', '', '', ''),
+('57d818e40749357d818e40749f', 'ROLEX', 'SUB DATE', 'SILVER', '16610', 'asdf', '2016-09-13 11:19:00', '45', '=watch_brand');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `listing`
+--
+ALTER TABLE `listing`
+  ADD PRIMARY KEY (`listing_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_email`);
+
+--
+-- Indexes for table `watch`
+--
+ALTER TABLE `watch`
+  ADD PRIMARY KEY (`watch_id`);
