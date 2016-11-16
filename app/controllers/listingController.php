@@ -1,8 +1,10 @@
 <?php
 
-	session_start();
+	// session_save_path("/home1/timerefl/sessions_here");
+	
 	// $errorMsg='';
 	include_once('../../lib/dependencies.php');
+	session_start();
 	include_once('../models/user.php');
 	include_once('../models/watch.php');
 	include_once('../models/listing.php');

@@ -119,17 +119,22 @@
 
 			// on scroll
 			win.scroll(function(){
+				// alert("You're scrolling!");
+
+				// if($(document).height() - win.height() == win.scrollTop() && busy == false){
 
 				if(win.scrollTop() + win.height() >= ($(document).height() - 200) && busy == false){
 
 					busy = true;
+
+					// alert('reached bottom!');
 					
 					$('#loading').show();
 
 					var numOfElements = $('.myThumb').length;
 
 					$.ajax({
-						
+						// url: 'http://test.timereflectioninc.com/start/'+numOfElements,
 						url: '?start='+numOfElements,
 						type: 'GET',
 						dataType: 'html',

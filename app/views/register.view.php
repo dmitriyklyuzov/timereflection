@@ -8,7 +8,10 @@
 
 	<body>
 
+<<<<<<< HEAD
 		<?php include_once("../../lib/analyticsTracking.php"); ?>
+=======
+>>>>>>> 5b04f4f961e8c26c386ef6d08a023e035f5fb694
 		<?php getNavbar(); ?>
 
 		<div class="container login-form-container">

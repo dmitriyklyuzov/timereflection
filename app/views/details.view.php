@@ -121,8 +121,7 @@
 			
 			<!-- DETAILS -->
 			<div class="col-sm-7 col-xs-12 clearfix" id="rightDiv">
-				<!-- <h3 class="text-center"><?php echo $brand . ' ' . $model; ?></h3> -->
-				<h3 class="text-center">$brand</h3>
+				<h3 class="text-center"><?php echo $brand . ' ' . $model; ?></h3>
 				<p class="text-center text-muted">
 					<?php echo $condition.'/10 ('.$new_used.')'; ?>
 				</p>
@@ -198,8 +197,7 @@
 						</tr>
 						<tr class="visible-xs">
 							<td><b>BOX</b></td>
-							<!-- <td><?php echo $box; ?></td> -->
-							<td>$box</td>
+							<td><?php echo $box; ?></td>
 						</tr>
 						<tr class="visible-xs">
 							<td><b>PAPERS</b></td>

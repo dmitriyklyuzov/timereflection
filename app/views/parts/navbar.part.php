@@ -2,7 +2,7 @@
 
 	function getNavbar(){
 		?>
-
+		
 		<div class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
@@ -14,7 +14,7 @@
 						<a class="navbar-brand" href="/"><b>TIME REFLECTION</b></a>
 					</div> <!-- navbar-header -->
 					<div class="collapse navbar-collapse navbar-right" id="myNavbar">
-						<form class="navbar-form navbar-left" role="search" action="http://localhost:8888/search" method="GET">
+						<form class="navbar-form navbar-left" role="search" action="http://timereflectioninc.com/search" method="GET">
 							<div class="input-group">
 								<input type="text" name="s" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
 								<span class="input-group-addon" id="basic-addon1">
@@ -52,8 +52,8 @@
 							<?php endif; ?>
 							<?php if(!User::isLoggedIn()):?>
 								<li class="hidden-sm"><a href="mailto:timereflectioninc@gmail.com">TIMEREFLECTIONINC@GMAIL.COM</a></li>
-								<li><a href="/contact">CONTACT US</a></li>
-								<li><a href="/about">ABOUT US</a></li>
+								<li><a href="/contact">CONTACT</a></li>
+								<li><a href="/about">ABOUT</a></li>
 								<li><a href="/login">LOG IN</a></li>
 								<!-- <li><a href="/register">SIGN UP</a></li> -->
 							<?php endif; ?>

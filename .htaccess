@@ -13,9 +13,6 @@ RewriteRule ^about app/controllers/aboutController.php [NC,L]
 # contact us
 RewriteRule ^contact app/controllers/aboutController.php [NC,L]
 
-# Get More Thumbnails
-RewriteRule ^/getMoreThumbs/([0-9a-zA-Z]) app/controllers/indexController.php?start=$1 [NC,L]
-
 # test
 RewriteRule ^test app/controllers/testController.php [NC,L]
 # RewriteRule ^test2 app/controllers/testController2.php [NC,L]
@@ -49,7 +46,7 @@ RewriteRule ^search?(.*)$ app/controllers/resultsController.php?s=$1 [NC,L,QSA]
 RewriteRule ^brands/([0-9a-zA-Z_%]+)/model/([0-9a-zA-Z_%]+) app/controllers/resultsController.php?s=$1&m=$2 [NC,L]
 
 #brands
-RewriteRule ^brands/([0-9a-zA-Z_%]+) app/controllers/resultsController.php?s=$1 [NC,L]
+RewriteRule ^brands/([0-9a-zA-Z]+) app/controllers/resultsController.php?s=$1 [NC,L]
 
 #delete
 RewriteRule ^delete/([0-9a-zA-Z]+) app/controllers/listingController.php?action=delete&reference=$1 [NC,L]
