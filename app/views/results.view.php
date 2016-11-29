@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<?php getHead($search . ' - results'); ?>
+		<script type="text/javascript" src="/public/js/expandList.js"></script>
 	</head>
 	<body>
 		
@@ -19,8 +20,8 @@
 							<div class="panel-body">
 								
 								
-								Showing results for "<?php echo $search; ?>"
-								<div class="btn-group" style="float:right">
+								Results for "<?php echo $search; ?>"
+								<!-- <div class="btn-group" style="float:right">
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by <span class="caret"></span></button>
 									<ul class="dropdown-menu">
 										<li><a href="">Date added</a></li>
@@ -29,7 +30,7 @@
 								</div>
 								<button class="btn btn-default" style="float:right; margin-right: 1em">
 									<span class="glyphicon glyphicon-sort"></span>
-								</button>
+								</button> -->
 							</div>
 						</div>
 					</div>

@@ -1,7 +1,7 @@
 <?php
 	
-	session_start();
 	include_once('../../lib/dependencies.php');
+	session_start();
 	include_once('../models/user.php');
 
 	$user = new User();
@@ -46,6 +46,7 @@
 						
 							$user -> setLoggedIn();
 							$user -> updateLastLogin();
+							$user -> updateLastIP($_SERVER['REMOTE_ADDR']);
 							$user -> zeroLoginAttempts();
 							echo '1';
 						}

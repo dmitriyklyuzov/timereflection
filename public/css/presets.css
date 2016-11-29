@@ -2,6 +2,9 @@
 	display: inline-block;
 }
 
+
+/* MARGINS */
+
 .margin-left-right-auto{
 	margin-left: auto;
 	margin-right: auto;
@@ -30,6 +33,8 @@
 .margin-left-2em{
 	margin-left: 2em;
 }
+
+/* PADDING */
 
 .padding-1em{
 	padding: 1em;
@@ -71,6 +76,14 @@
 	padding-top: 6em;
 }
 
+.padding-right-0em{
+	padding-right: 0em;
+}
+
+.padding-right-1em{
+	padding-right: 1em;
+}
+
 .padding-bottom-0em{
 	padding-bottom: 0em;
 }
@@ -83,23 +96,23 @@
 	padding-bottom: 1em;	
 }
 
-<<<<<<< HEAD
 .padding-bottom-2em{
 	padding-bottom: 2em;	
 }
 
-=======
->>>>>>> 5b04f4f961e8c26c386ef6d08a023e035f5fb694
 .padding-left-0em{
 	padding-left: 0em;
 }
+
 .padding-left-1em{
 	padding-left: 1em;
 }
 
-.padding-right-0em{
-	padding-right: 0em;
+.padding-left-2em{
+	padding-left: 2em;
 }
+
+ /* COLORS */
 
 .color-white{
 	color: white;
@@ -108,6 +121,8 @@
 .background-white{
 	background-color: white;
 }
+
+/* CENTERING */
 
 .row-centered{
 	text-align: center;
@@ -120,6 +135,14 @@
 	margin-right: -4px;
 }
 
+.vertical-center{
+	min-height: 100%;
+	min-height: 100vh;
+
+	display: flex;
+	align-items: center;
+}
+
 /* TRANSITIONS */
 
 .transition-ease{
@@ -130,6 +153,16 @@
 	-ms-transition: all ease 0.3s;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
 .form-container{
 	/*background-color: #fff;*/
 	margin-bottom: 1.875em;
@@ -138,12 +171,4 @@
 @media (max-width: 767px){
 	.form-container{
 	}
-}
-
-.vertical-center{
-	min-height: 100%;
-	min-height: 100vh;
-
-	display: flex;
-	align-items: center;
 }

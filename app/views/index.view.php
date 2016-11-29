@@ -10,6 +10,7 @@
 		<meta property="og:description" content="We specialize in buying, selling and trading authentic unworn and pre-owned watches. We source the most popular luxury watches with notable savings."/>
 
 		<script type="text/javascript" src="/public/js/isInView.js"></script>
+		<script type="text/javascript" src="/public/js/expandList.js"></script>
 	</head>
 
 	<body>
@@ -79,7 +80,7 @@
 			<?php  include ('../views/parts/brandsAndModels.part.php'); ?>
 
 			<div class="col-md-9 col-sm-8" id="allWatches">
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-xs-12">
 						<div class="panel panel-default">
 							<div class="panel-body">
@@ -96,7 +97,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="main-content">
 					<div class="row multi-columns-row" id="thumbs">
 

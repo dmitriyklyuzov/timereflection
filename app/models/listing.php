@@ -155,6 +155,19 @@
 			else return '0';
 		}
 
+		static function getListingCount($brand, $wornUnworn){
+			$conn = DB();
+			if($wornUnworn == 0){
+				$result = $conn -> query("SELECT COUNT(*) FROM watch INNER JOIN listing on watch.watch_reference = listing.watch_reference WHERE watch_brand = '$brand';");
+			}
+			else{
+				$result = $conn -> query("SELECT COUNT(*) FROM watch INNER JOIN listing on watch.watch_reference = listing.watch_reference WHERE watch_brand = '$brand' AND listing_new_used = '$wornUnworn';");
+			}
+			$conn -> close();
+			$row = $result -> fetch_assoc();
+			return $row['COUNT(*)'];
+		}
+
 		static function getTotalPrice(){
 			$conn = DB();
 			$result = $conn -> query('SELECT SUM(listing_price) FROM listing;');

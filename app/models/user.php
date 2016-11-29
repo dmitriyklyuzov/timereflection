@@ -60,6 +60,11 @@
 			$conn -> close();
 		}
 
+		function updateLastIP($ip){
+			$conn = DB();
+			$conn -> query("UPDATE user SET user_last_ip = $ip WHERE user_email='".$this -> getEmail()."';");
+		}
+
 		function getLoginAttempts(){
 			$conn = DB();
 			$result = $conn -> query("SELECT user_login_attempts FROM user WHERE user_email='".$this -> getEmail()."';");

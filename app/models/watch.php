@@ -39,9 +39,16 @@
 			return $result;
 		}
 
-		static function getModelList($brand){
+		// static function getModelList($brand){
+		// 	$conn = DB();
+		// 	$result = $conn -> query("SELECT DISTINCT watch_model FROM watch INNER JOIN listing on watch.watch_reference = listing.watch_reference WHERE watch_brand = '" . $brand . "' ORDER BY watch_model ASC;");
+		// 	$conn -> close();
+		// 	return $result;
+		// }
+
+		static function getModelList($brand, $wornUnworn){
 			$conn = DB();
-			$result = $conn -> query("SELECT DISTINCT watch_model FROM watch INNER JOIN listing on watch.watch_reference = listing.watch_reference WHERE watch_brand = '" . $brand . "' ORDER BY watch_model ASC;");
+			$result = $conn -> query("SELECT DISTINCT watch_model FROM watch INNER JOIN listing on watch.watch_reference = listing.watch_reference WHERE watch_brand = '" . $brand . "' AND listing_new_used = $wornUnworn ORDER BY watch_model ASC;");
 			$conn -> close();
 			return $result;
 		}

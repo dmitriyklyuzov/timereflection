@@ -195,11 +195,28 @@ ul{
 	list-style-type: none;
 }
 
-#navbox-left .panel-body a{
-	display: block;
-	padding: 12px 30px;
-	size: 1em;
+#navbox-left .watch_brand{
+	display: inline-block;
+	/*display: block;*/
+	/*padding: 12px 1em 12px 30px;*/
+	padding: 0em 0.5em 0.5em 0.5em;
+	/*padding-top: 12px;*/
+	/*padding-left: 1em;*/
+	/*size: 1em;*/
+	text-decoration: none;
+}
 
+#navbox-left .watch_model{
+	display: block;
+	/*padding: 8px 5px;*/
+	padding: 0em 0.5em 0.5em 0.5em;
+	/*size: 1em;*/
+}
+
+#navbox-left .watch_model p:hover{
+	color: #337ab7;
+	/*text-decoration: underline;*/
+	/*text-decoration-color: #337ab7;*/
 }
 
 .overlay{
@@ -243,6 +260,10 @@ ul{
 
 #rightDiv{
 	padding-top: 9em;
+}
+
+.watch_model{
+	padding: 5px 15px;
 }
 
 /* SCREEN - MD */

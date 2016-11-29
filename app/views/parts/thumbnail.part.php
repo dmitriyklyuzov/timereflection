@@ -1,6 +1,8 @@
 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 	<div class="thumbnail no-rounded-corners myThumb">
-		<p style="padding-left: 0.5em; padding-right: 0.5em"class="text-center padding-top-1em"><?php echo strtoupper($model); ?></p>
+		<p style="padding-left: 0.5em; padding-right: 0.5em"class="text-center padding-top-1em">
+			<b><?php echo strtoupper($model); ?></b>
+		</p>
 		<!-- <?php echo $break; ?> -->
 		<hr>
 		<a href="/details/<?php echo $listing_id; ?>">
@@ -19,7 +21,7 @@
 			<p><b>Material:</b> <?php echo $material; ?></p>
 			<p><b>Dial:</b> <?php echo $dial; ?></p>
 			<p><b>Case size:</b> <?php echo $caseSize . 'mm'; ?></p>
-			<p><b>Condition:</b> <?php echo $condition.'/10 ('.$new_used.')'; ?></p>
+			<p><b>Condition:</b> <?php echo $condition.'/10<br>('.$new_used.')'; ?></p>
 			<p><b>Box: </b> <?php echo $box; ?></p>
 			<p><b>Papers: </b> <?php echo $papers; ?></p>
 			<p><b>Notes:</b> <?php echo $notes; ?></p>
